@@ -1,0 +1,191 @@
+\documentclass[oneside]{article}
+\input{common}
+
+\SetOrganization{Primordial Machine's}
+\SetLibraryName{Trigonometry Library}
+\SetLibraryVersion{v0.1}
+\SetLibraryRepository{https://github.com/primordialmachine/trigonometry}
+\SetAuthor{Michael Heilmann}
+\SetEmail{michaelheilmann@primordialmachine.com}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\section{Synopsis}
+C++ 17 library providing functionality related to trigonometry.
+The library is made available publicly on
+\href{\GetLibraryRepository}{Github}
+under the
+\href{\GetLibraryRepository/blob/master/LICENSE}{MIT License}.
+
+\section{Requirements}
+If the library is added to a project, then one needs to add Primordial Machine libraries
+\href{https://github.com/primordialmachine/one-zero-functors}{One Zero Functors Library}
+as well.
+
+\section{Limitations and Restrictions}
+The library officially only supports Visual Studio 2017 and Windows 10.
+%The library provides support for floating point types i.e. types which are provided by the C++ language.
+%However, as a proof of concept of the abstractions, fixed point and arbitrary precision implementations need to be added to the library.
+
+%\section{Introductory example}
+%Examples are located in the \href{\GetLibraryRepository/blob/master/examples}{examples} directory.
+
+\section{Building under Visual Studio 2017}
+\begin{enumerate}
+\item Open the solution \texttt{solution.sln} in Microsoft Visual Studio 2017.
+\item Batch build everything.
+\item The folder \texttt{packages} contains the distribution of the library i.e. include files and the
+      static libraries for
+  \begin{enumerate}
+    \item the platforms \texttt{Win32} and \texttt{x64} and
+    \item configurations \texttt{Release} and \texttt{Debug}.
+  \end{enumerate}
+\item Copy the contents of the \verb+packages+ folder into a directory. Let
+      \verb+[library home]+ be a placeholder denoting the path by which that folder
+      can be referenced from your project.
+\item Add
+  \begin{enumerate}
+    \item the include path
+\begin{verbatim}
+[library home]/primordialmachine/trigonometry/
+$(PlatformTarget.toLower())/$(Configuration.toLower())/includes
+\end{verbatim}
+	and
+    \item the library path
+\begin{verbatim}
+[library home]/primordialmachine/trigonometry/
+$(PlatformTarget.toLower())/$(Configuration.toLower())/libraries
+\end{verbatim}
+    to your project.
+\end{enumerate}
+\item Link your project with the library \verb+trigonometry.lib+.
+\item Add the include directive \verb+#include "primordialmachine/trigonometry/include.hpp"+ where appropriate.
+\item You can now use the functionality provided by the library.
+\end{enumerate}
+
+\section{Library Interface Documentation}
+
+\subsection{\texttt{namespace primordialmachine}}
+The namespace this library is adding its declarations/definitions to.
+The added namespace elements are documented below.
+
+\subsection{\textit{concept NullaryFunctor}}
+A \textit{NullaryFunctor} is a function object with two template arguments \texttt{RESULT} and
+\texttt{ENABLED}. Specializations of this type must provide a constant \verb+operator()+ with
+zero parameters. The return value of that operand is a value of type \texttt{RESULT} (or constant
+reference to a value of that type).\\
+
+\subsection{\textit{concept UnaryFunctor}}
+A \textit{NullaryFunctor} is a function object with three template arguments \texttt{RESULT},
+\textit{PARAMETER}, and \texttt{ENABLED}. Specializations of this type must provide a constant
+\verb+operator()+ with one parameters of type \textit{PARAMETER} (or a cv-qualified variant of
+that). The return value of that operand is a value of type \texttt{RESULT} (or constant
+reference to a value of that type).\\
+
+\noindent{}The default type of \verb+ENABLED+ is \verb+void+. Specializations of this type may use
+the \verb+ENABLED+ argument to perform \textit{SFINAE}.
+
+\subsection{\texttt{struct pi\_functor}}
+A \textit{NullaryFunctor} which provides (an approximation of) the value $\pi$.
+Specializations of for the types \texttt{float}, \texttt{double}, and \texttt{long double} are provided.
+
+\noindent{}Usage example:
+\begin{verbatim}
+#include "primordialmachine/trigonometry/include.hpp"
+#include <stdlib.h>
+#include <iostream>
+
+int main(int argc, char **argv) {
+  std::cout << primordialmachine::pi_functor<float>()() << std::endl;
+  std::cout << primordialmachine::pi_functor<double>()() << std::endl;
+  std::cout << primordialmachine::pi_functor<long double>()() << std::endl;  
+  return EXIT_SUCCESS;
+}
+\end{verbatim}
+
+\subsection{\texttt{auto pi\textlangle T\textrangle()}}
+A function which returns the value of \texttt{primordialmachine::pi\_functor\textlangle T\textrangle}
+for the type \texttt{T}.
+
+\noindent{}Possible implementations
+\begin{verbatim}
+template<typename T>
+auto pi() -> decltype(pi_functor<T>()())
+{ return pi_functor<T>()(); }
+\end{verbatim}
+
+\subsection{\textit{concept AngleUnit}}
+An \textit{AngleUnit} is a \texttt{struct} type denoting a unit in which an angle is measured.
+This library provides types corresponding to the angle unit \textit{degrees}, \textit{radians},
+and \textit{turns}.
+
+\subsection{\texttt{angle\_unit\_degrees}}
+A \textit{AngleUnit} denoting the angle unit \textit{degrees}.
+\subsection{\texttt{angle\_unit\_radians}}
+A \textit{AngleUnit} denoting the angle unit \textit{radians}.
+\subsection{\texttt{angle\_unit\_turns}}
+A \textit{AngleUnit} denoting the angle unit \textit{turns}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\texttt{sin\_functor}}
+A \textit{UnaryFunctor} which computes the
+sine
+of an angle.
+The first parameter is the angle, the return value the sine of that angle.
+
+\noindent{}This library provides specializations of this functor for all floating point types.
+The specializations assume the angle is measured in radians.
+
+\subsection{\texttt{sin}}
+A function which returns the value of \texttt{primordialmachine::sin\_functor\textlangle T\textrangle}
+for a value of type \texttt{T}.
+
+\noindent{}Possible implementations
+\begin{verbatim}
+template<typename T>
+auto sin(const T& v) -> decltype(sin_functor<T, void>()(v))
+{ return sin_functor<T, void>()(v); }
+\end{verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\texttt{cos\_functor}}
+A \textit{UnaryFunctor} which computes the
+cosine
+of an angle.
+The first parameter is the angle, the return value the cosine of that angle.
+
+\noindent{}This library provides specializations of this functor for all floating point types.
+The specializations assume the angle is measured in radians.
+
+\subsection{\texttt{cos}}
+A function which returns the value of \texttt{primordialmachine::cos\_functor\textlangle T\textrangle}
+for a value of type \texttt{T}.
+
+\noindent{}Possible implementations
+\begin{verbatim}
+template<typename T>
+auto cos(const T& v) -> decltype(cos_functor<T, void>()(v))
+{ return cos_functor<T, void>()(v); }
+\end{verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\texttt{tan\_functor}}
+A \textit{UnaryFunctor} which computes the
+tangens
+of an angle.
+The first parameter is the angle, the return value the tangens of that angle.
+
+\noindent{}This library provides specializations of this functor for all floating point types.
+The specializations assume the angle is measured in radians.
+
+\subsection{\texttt{tan}}
+A function which returns the value of \texttt{primordialmachine::tan\_functor\textlangle T\textrangle}
+for a value of type \texttt{T}.
+
+\noindent{}Possible implementations
+\begin{verbatim}
+template<typename T>
+auto tan(const T& v) -> decltype(tan_functor<T, void>()(v))
+{ return tan_functor<T, void>()(v); }
+\end{verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
