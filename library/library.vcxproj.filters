@@ -47,6 +47,9 @@
     <ClInclude Include="includes\primordialmachine\trigonometry\tan.hpp">
       <Filter>Headerdateien\trigonometry</Filter>
     </ClInclude>
+    <ClInclude Include="includes\primordialmachine\trigonometry\acos.hpp">
+      <Filter>Headerdateien\trigonometry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\primordialmachine\trigonometry\include.cpp">

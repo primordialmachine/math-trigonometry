@@ -25,11 +25,36 @@
 
 #pragma once
 
-#include "primordialmachine/trigonometry/acos.hpp"
-#include "primordialmachine/trigonometry/angle_unit_degrees.hpp"
-#include "primordialmachine/trigonometry/angle_unit_radians.hpp"
-#include "primordialmachine/trigonometry/angle_unit_turns.hpp"
-#include "primordialmachine/trigonometry/cos.hpp"
-#include "primordialmachine/trigonometry/pi.hpp"
-#include "primordialmachine/trigonometry/sin.hpp"
-#include "primordialmachine/trigonometry/tan.hpp"
+#include <cmath>
+
+namespace primordialmachine {
+
+template<typename T, typename E = void>
+struct acos_functor;
+
+template<typename T>
+auto
+acos(const T& v) -> decltype(acos_functor<T, void>()(v))
+{
+  return acos_functor<T, void>()(v);
+}
+
+template<>
+struct acos_functor<float, void>
+{
+  float operator()(float v) const { return std::acos(v); }
+}; // struct acos_functor
+
+template<>
+struct acos_functor<double, void>
+{
+  double operator()(double v) const { return std::acos(v); }
+}; // struct acos_functor
+
+template<>
+struct acos_functor<long double, void>
+{
+  long double operator()(long double v) const { return std::acos(v); }
+}; // struct acos_functor
+
+} // namespace primordialmachine
