@@ -84,7 +84,9 @@ that). The return value of that operand is a value of type \texttt{RESULT} (or c
 reference to a value of that type).\\
 
 \noindent{}The default type of \verb+ENABLED+ is \verb+void+. Specializations of this type may use
-the \verb+ENABLED+ argument to perform \textit{SFINAE}.
+the \verb+ENABLED+ argument to perform \textit{SFINAE}.\\
+
+\noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
 
 \subsection{\texttt{struct pi\_functor}}
 A \textit{NullaryFunctor} which provides (an approximation of) the value $\pi$.
@@ -104,7 +106,7 @@ int main(int argc, char **argv) {
 }
 \end{verbatim}
 
-\subsection{\texttt{auto pi\textlangle T\textrangle()}}
+\subsection{\texttt{pi}}
 A function which returns the value of \texttt{primordialmachine::pi\_functor\textlangle T\textrangle}
 for the type \texttt{T}.
 
@@ -135,7 +137,9 @@ of an angle.
 The first parameter is the angle, the return value the sine of that angle.
 
 \noindent{}This library provides specializations of this functor for all floating point types.
-The specializations assume the angle is measured in radians.
+The specializations assume the angle is measured in radians.\\
+
+\noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
 
 \subsection{\texttt{sin}}
 A function which returns the value of \texttt{primordialmachine::sin\_functor\textlangle T\textrangle}
@@ -147,6 +151,9 @@ template<typename T>
 auto sin(const T& v) -> decltype(sin_functor<T, void>()(v))
 { return sin_functor<T, void>()(v); }
 \end{verbatim}
+
+\noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\texttt{cos\_functor}}
 A \textit{UnaryFunctor} which computes the
@@ -155,7 +162,9 @@ of an angle.
 The first parameter is the angle, the return value the cosine of that angle.
 
 \noindent{}This library provides specializations of this functor for all floating point types.
-The specializations assume the angle is measured in radians.
+The specializations assume the angle is measured in radians.\\
+
+\noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
 
 \subsection{\texttt{cos}}
 A function which returns the value of \texttt{primordialmachine::cos\_functor\textlangle T\textrangle}
@@ -167,6 +176,9 @@ template<typename T>
 auto cos(const T& v) -> decltype(cos_functor<T, void>()(v))
 { return cos_functor<T, void>()(v); }
 \end{verbatim}
+
+\noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\texttt{tan\_functor}}
 A \textit{UnaryFunctor} which computes the
@@ -175,17 +187,72 @@ of an angle.
 The first parameter is the angle, the return value the tangens of that angle.
 
 \noindent{}This library provides specializations of this functor for all floating point types.
-The specializations assume the angle is measured in radians.
+The specializations assume the angle is measured in radians.\\
+
+\noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
 
 \subsection{\texttt{tan}}
 A function which returns the value of \texttt{primordialmachine::tan\_functor\textlangle T\textrangle}
 for a value of type \texttt{T}.
 
-\noindent{}Possible implementations
+\noindent{}A possible implementation is
 \begin{verbatim}
 template<typename T>
 auto tan(const T& v) -> decltype(tan_functor<T, void>()(v))
 { return tan_functor<T, void>()(v); }
 \end{verbatim}
+
+\noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\texttt{acos\_functor}}
+A \textit{UnaryFunctor} which computes the
+arccosine
+of a value.
+The first parameter is the value, the return value the arccosine of that value.
+
+\noindent{}This library provides specializations of this functor for all floating point types.
+For these specializations, \texttt{RESULT} is of type \texttt{PARAMETER} and the return value
+denotes the inverse trigonometric function value for the specified input value.\\
+
+\noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
+
+\subsection{\texttt{acos}}
+A function which returns the value of \texttt{primordialmachine::acos\_functor\textlangle T\textrangle}
+for a value of type \texttt{T}.
+
+\noindent{}A possible implementation is
+\begin{verbatim}
+template<typename T>
+auto acos(const T& v) -> decltype(acos_functor<T, void>()(v))
+{ return acos_functor<T, void>()(v); }
+\end{verbatim}
+
+\noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\texttt{asin\_functor}}
+A \textit{UnaryFunctor} which computes the
+arcsine
+of a value.
+The first parameter is the value, the return value the arcsine of that value.
+
+\noindent{}This library provides specializations of this functor for all floating point types.
+For these specializations, \texttt{RESULT} is of type \texttt{PARAMETER} and the return value
+denotes the inverse trigonometric function value for the specified input value.\\
+
+\noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
+
+\subsection{\texttt{asin}}
+A function which returns the value of \texttt{primordialmachine::asin\_functor\textlangle T\textrangle}
+for a value of type \texttt{T}.
+
+\noindent{}A possible implementation is
+\begin{verbatim}
+template<typename T>
+auto asin(const T& v) -> decltype(asin_functor<T, void>()(v))
+{ return asin_functor<T, void>()(v); }
+\end{verbatim}
+
+\noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
