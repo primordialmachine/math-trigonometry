@@ -255,4 +255,27 @@ auto asin(const T& v) -> decltype(asin_functor<T, void>()(v))
 
 \noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\texttt{cot\_functor}}
+A \textit{UnaryFunctor} which computes the
+cotangens of an angle.
+The first parameter is the angle, the return value the cotangens of that angle.
+
+\noindent{}This library provides specializations of this functor for all floating point types.
+The specializations assume the angle is measured in radians.\\
+
+\noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
+
+\subsection{\texttt{cot}}
+A function which returns the value of \texttt{primordialmachine::cot\_functor\textlangle T\textrangle}
+for a value of type \texttt{T}.
+
+\noindent{}A possible implementation is
+\begin{verbatim}
+template<typename T>
+auto cot(const T& v) -> decltype(cot_functor<T, void>()(v))
+{ return cot_functor<T, void>()(v); }
+\end{verbatim}
+
+\noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
