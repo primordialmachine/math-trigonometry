@@ -53,6 +53,9 @@
     <ClInclude Include="includes\primordialmachine\trigonometry\asin.hpp">
       <Filter>Headerdateien\trigonometry</Filter>
     </ClInclude>
+    <ClInclude Include="includes\primordialmachine\trigonometry\cot.hpp">
+      <Filter>Headerdateien\trigonometry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\primordialmachine\trigonometry\include.cpp">

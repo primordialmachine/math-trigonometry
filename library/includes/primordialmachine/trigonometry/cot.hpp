@@ -25,13 +25,25 @@
 
 #pragma once
 
-#include "primordialmachine/trigonometry/acos.hpp"
-#include "primordialmachine/trigonometry/angle_unit_degrees.hpp"
-#include "primordialmachine/trigonometry/angle_unit_radians.hpp"
-#include "primordialmachine/trigonometry/angle_unit_turns.hpp"
-#include "primordialmachine/trigonometry/asin.hpp"
-#include "primordialmachine/trigonometry/cos.hpp"
-#include "primordialmachine/trigonometry/cot.hpp"
-#include "primordialmachine/trigonometry/pi.hpp"
-#include "primordialmachine/trigonometry/sin.hpp"
+#include "primordialmachine/one_zero_functors/include.hpp"
 #include "primordialmachine/trigonometry/tan.hpp"
+
+namespace primordialmachine {
+
+template<typename T, typename E = void>
+struct cot_functor;
+
+template<typename T>
+auto
+cot(const T& v) -> decltype(cot_functor<T, void>()(v))
+{
+  return cot_functor<T, void>()(v);
+}
+
+template<typename T>
+struct cot_functor<T, std::enable_if_t<std::is_floating_point_v<T>>>
+{
+  T operator()(T x) const { return one<T>() / tan(x); }
+}; // struct cot_functor
+
+} // namespace primordialmachine
