@@ -25,12 +25,36 @@
 
 #pragma once
 
-#include "primordialmachine/trigonometry/acos.hpp"
-#include "primordialmachine/trigonometry/angle_unit_degrees.hpp"
-#include "primordialmachine/trigonometry/angle_unit_radians.hpp"
-#include "primordialmachine/trigonometry/angle_unit_turns.hpp"
-#include "primordialmachine/trigonometry/asin.hpp"
-#include "primordialmachine/trigonometry/cos.hpp"
-#include "primordialmachine/trigonometry/pi.hpp"
-#include "primordialmachine/trigonometry/sin.hpp"
-#include "primordialmachine/trigonometry/tan.hpp"
+#include <cmath>
+
+namespace primordialmachine {
+
+template<typename T, typename E = void>
+struct asin_functor;
+
+template<typename T>
+auto
+asin(const T& v) -> decltype(asin_functor<T, void>()(v))
+{
+  return asin_functor<T, void>()(v);
+}
+
+template<>
+struct asin_functor<float, void>
+{
+  float operator()(float v) const { return std::asin(v); }
+};
+
+template<>
+struct asin_functor<double, void>
+{
+  double operator()(double v) const { return std::asin(v); }
+};
+
+template<>
+struct asin_functor<long double, void>
+{
+  long double operator()(long double v) const { return std::asin(v); }
+};
+
+} // namespace primordialmachine
