@@ -56,6 +56,18 @@
     <ClInclude Include="includes\primordialmachine\trigonometry\cot.hpp">
       <Filter>Headerdateien\trigonometry</Filter>
     </ClInclude>
+    <ClInclude Include="includes\primordialmachine\trigonometry\angle.hpp">
+      <Filter>Headerdateien\trigonometry</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\primordialmachine\trigonometry\angle_degrees.hpp">
+      <Filter>Headerdateien\trigonometry</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\primordialmachine\trigonometry\angle_radians.hpp">
+      <Filter>Headerdateien\trigonometry</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\primordialmachine\trigonometry\angle_turns.hpp">
+      <Filter>Headerdateien\trigonometry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\primordialmachine\trigonometry\include.cpp">

@@ -1,9 +1,9 @@
-\documentclass[oneside]{article}
+\documentclass[oneside]{report}
 \input{common}
 
 \SetOrganization{Primordial Machine's}
 \SetLibraryName{Trigonometry Library}
-\SetLibraryVersion{v1.1}
+\SetLibraryVersion{v1.2}
 \SetLibraryRepository{https://github.com/primordialmachine/trigonometry}
 \SetAuthor{Michael Heilmann}
 \SetEmail{michaelheilmann@primordialmachine.com}
@@ -18,12 +18,12 @@ The library is made available publicly on
 under the
 \href{\GetLibraryRepository/blob/master/LICENSE}{MIT License}.
 
-\section{Requirements}
+\chapter{Requirements}
 If the library is added to a project, then one needs to add Primordial Machine libraries
 \href{https://github.com/primordialmachine/one-zero-functors}{One Zero Functors Library}
 as well.
 
-\section{Limitations and Restrictions}
+\chapter{Limitations and Restrictions}
 The library officially only supports Visual Studio 2017 and Windows 10.
 %The library provides support for floating point types i.e. types which are provided by the C++ language.
 %However, as a proof of concept of the abstractions, fixed point and arbitrary precision implementations need to be added to the library.
@@ -31,7 +31,7 @@ The library officially only supports Visual Studio 2017 and Windows 10.
 %\section{Introductory example}
 %Examples are located in the \href{\GetLibraryRepository/blob/master/examples}{examples} directory.
 
-\section{Building under Visual Studio 2017}
+\chapter{Building under Visual Studio 2017}
 \begin{enumerate}
 \item Open the solution \texttt{solution.sln} in Microsoft Visual Studio 2017.
 \item Batch build everything.
@@ -64,19 +64,19 @@ $(PlatformTarget.toLower())/$(Configuration.toLower())/libraries
 \item You can now use the functionality provided by the library.
 \end{enumerate}
 
-\section{Library Interface Documentation}
+\chapter{Library Interface Documentation}
 
-\subsection{\texttt{namespace primordialmachine}}
+\section{\texttt{namespace primordialmachine}}
 The namespace this library is adding its declarations/definitions to.
 The added namespace elements are documented below.
 
-\subsection{\textit{concept NullaryFunctor}}
+\section{\textit{concept NullaryFunctor}}
 A \textit{NullaryFunctor} is a function object with two template arguments \texttt{RESULT} and
 \texttt{ENABLED}. Specializations of this type must provide a constant \verb+operator()+ with
 zero parameters. The return value of that operand is a value of type \texttt{RESULT} (or constant
 reference to a value of that type).\\
 
-\subsection{\textit{concept UnaryFunctor}}
+\section{\textit{concept UnaryFunctor}}
 A \textit{NullaryFunctor} is a function object with three template arguments \texttt{RESULT},
 \textit{PARAMETER}, and \texttt{ENABLED}. Specializations of this type must provide a constant
 \verb+operator()+ with one parameters of type \textit{PARAMETER} (or a cv-qualified variant of
@@ -88,7 +88,7 @@ the \verb+ENABLED+ argument to perform \textit{SFINAE}.\\
 
 \noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
 
-\subsection{\texttt{struct pi\_functor}}
+\section{\texttt{struct pi\_functor}}
 A \textit{NullaryFunctor} which provides (an approximation of) the value $\pi$.
 Specializations of for the types \texttt{float}, \texttt{double}, and \texttt{long double} are provided.
 
@@ -99,9 +99,10 @@ Specializations of for the types \texttt{float}, \texttt{double}, and \texttt{lo
 #include <iostream>
 
 int main(int argc, char **argv) {
-  std::cout << primordialmachine::pi_functor<float>()() << std::endl;
-  std::cout << primordialmachine::pi_functor<double>()() << std::endl;
-  std::cout << primordialmachine::pi_functor<long double>()() << std::endl;  
+  using namspace primordialmachine;
+  std::cout << pi_functor<float>()() << std::endl;
+  std::cout << pi_functor<double>()() << std::endl;
+  std::cout << pi_functor<long double>()() << std::endl;  
   return EXIT_SUCCESS;
 }
 \end{verbatim}
@@ -117,7 +118,7 @@ auto pi() -> decltype(pi_functor<T>()())
 { return pi_functor<T>()(); }
 \end{verbatim}
 
-\subsection{\textit{concept AngleUnit}}
+\section{\textit{concept AngleUnit}}
 An \textit{AngleUnit} is a \texttt{struct} type denoting a unit in which an angle is measured.
 This library provides types corresponding to the angle unit \textit{degrees}, \textit{radians},
 and \textit{turns}.
@@ -130,7 +131,7 @@ A \textit{AngleUnit} denoting the angle unit \textit{radians}.
 A \textit{AngleUnit} denoting the angle unit \textit{turns}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\texttt{sin\_functor}}
+\section{\texttt{sin\_functor}}
 A \textit{UnaryFunctor} which computes the
 sine
 of an angle.
@@ -155,7 +156,7 @@ auto sin(const T& v) -> decltype(sin_functor<T, void>()(v))
 \noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\texttt{cos\_functor}}
+\section{\texttt{cos\_functor}}
 A \textit{UnaryFunctor} which computes the
 cosine
 of an angle.
@@ -180,7 +181,7 @@ auto cos(const T& v) -> decltype(cos_functor<T, void>()(v))
 \noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\texttt{tan\_functor}}
+\section{\texttt{tan\_functor}}
 A \textit{UnaryFunctor} which computes the
 tangens
 of an angle.
@@ -205,7 +206,7 @@ auto tan(const T& v) -> decltype(tan_functor<T, void>()(v))
 \noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\texttt{acos\_functor}}
+\section{\texttt{acos\_functor}}
 A \textit{UnaryFunctor} which computes the
 arccosine
 of a value.
@@ -230,7 +231,7 @@ auto acos(const T& v) -> decltype(acos_functor<T, void>()(v))
 
 \noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\texttt{asin\_functor}}
+\section{\texttt{asin\_functor}}
 A \textit{UnaryFunctor} which computes the
 arcsine
 of a value.
@@ -255,7 +256,7 @@ auto asin(const T& v) -> decltype(asin_functor<T, void>()(v))
 
 \noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\texttt{cot\_functor}}
+\section{\texttt{cot\_functor}}
 A \textit{UnaryFunctor} which computes the
 cotangens of an angle.
 The first parameter is the angle, the return value the cotangens of that angle.
@@ -277,5 +278,84 @@ auto cot(const T& v) -> decltype(cot_functor<T, void>()(v))
 \end{verbatim}
 
 \noindent{}\textcolor{orange}{\textit{Defect: No error/exception specification is provided.}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\texttt{angle}}
+Representation of an angle. \texttt{angle} represents the angle as a value of type \texttt{UNDERLYING\_TYPE}.
+Furthermore, it denotes the unit in which the angle is measured by the type \texttt{UNIT}.
+\begin{verbatim}
+template<typename UNIT, typename UNDERLYING_TYPE, typename ENABLED = void>
+struct angle;
+\end{verbatim}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{|>{\hsize=0.5\hsize}X|>{\hsize=1.5\hsize}X|}
+\hline
+\texttt{UNIT}             & Any \textit{AngleUnit} type denoting the unit in which the angle is measured.\\\hline
+\texttt{UNDERLYING\_TYPE} & The underlying type used to represent the angle value.
+                            \texttt{UNDERLYING\_TYPE} must be an \href{https://en.cppreference.com/w/c/language/arithmetic_types}{Arithmetic Type}.\\\hline
+\texttt{ENABLED}          & For SFINAE. Default value is \texttt{void}.\\\hline
+\end{tabularx}
+\end{center}
+
+\noindent{}The library provides specializations:
+\begin{center}
+\begin{tabularx}{\textwidth}{|X|X|}
+\hline
+\texttt{UNIT}             & Any \textit{AngleUnit} type provided by this library.\\\hline
+\texttt{UNDERLYING\_TYPE} & \texttt{float}, \texttt{double}, or \texttt{long double}.\\\hline
+\end{tabularx}
+\end{center}
+
+\subsection{Constructors}
+
+\noindent{}\texttt{angle}\texttt{(}\texttt{)} (1)\\
+\noindent{}\texttt{angle}\texttt{(}\texttt{UNDERLYING\_TYPE value}\texttt{)} (2)\\
+
+\noindent{}(1) Construct the \texttt{angle} value with \texttt{zero\textlangle UNDERLYING\_TYPE\textrangle()}.\\
+(2) Construct the \texttt{angle} value with the specified value \texttt{value}.\\
+
+\subsection{Members}
+\subsubsection{\texttt{operator+}}
+Compute the sum of two \texttt{angle} values.\\
+
+\noindent\texttt{angle\textlangle UNIT, UNDERLYING\_TYPE\textrangle}\\
+\texttt{operator+}\texttt{(}\texttt{const angle\textlangle UNIT, UNDERLYING\_TYPE\textrangle\& a}\texttt{,}\\
+\hphantom{\texttt{operator+}\texttt{(}}\texttt{const angle\textlangle UNIT, UNDERLYING\_TYPE\textrangle\& b)}\texttt{)}\\
+
+\subsubsection{\texttt{operator-}}
+Compute the difference of two angles.\\
+
+\noindent\texttt{angle\textlangle UNIT, UNDERLYING\_TYPE\textrangle}\\
+\texttt{operator-}\texttt{(}\texttt{const angle\textlangle UNIT, UNDERLYING\_TYPE\textrangle\& a}\texttt{,}\\
+\hphantom{\texttt{operator-}\texttt{(}}\texttt{const angle\textlangle UNIT, UNDERLYING\_TYPE\textrangle\& b)}\texttt{)}\\
+
+\subsubsection{\texttt{operator*}}
+Compute the product of an angle and a scalar.\\
+
+\noindent\texttt{angle\textlangle UNIT, UNDERLYING\_TYPE\textrangle}\\
+\texttt{operator*}\texttt{(}\texttt{const angle\textlangle UNIT, UNDERLYING\_TYPE\textrangle\& a}\texttt{,}\\
+\hphantom{\texttt{operator*}\texttt{(}}\texttt{UNDERLYING\_TYPE s}\texttt{)}\\
+
+\noindent{}\texttt{angle\textlangle UNIT, UNDERLYING\_TYPE\textrangle}\\
+\texttt{operator*}\texttt{(}\texttt{UNDERLYING\_TYPE s}\texttt{,}\\
+\hphantom{\texttt{operator*}\texttt{(}}\texttt{const angle\textlangle UNIT, UNDERLYING\_TYPE\textrangle\& a}\texttt{)}\\
+
+\subsubsection{\texttt{operator/}}
+Compute the quotient of an angle and a scalar.\\
+
+\noindent\texttt{angle\textlangle UNIT, UNDERLLYING\_TYPE\textrangle}\\
+\texttt{operator*}\texttt{(}\texttt{UNDERLYING\_TYPE s}\texttt{,}\\
+\hphantom{\texttt{operator*}\texttt{(}}\texttt{const angle\textlangle UNIT, UNDERLYING\_TYPE\textrangle\& a)}\texttt{)}\\
+
+\noindent\texttt{angle\textlangle UNIT, UNDERLYING\_TYPE\textrangle}\\
+\texttt{operator/}\texttt{(}\texttt{const angle\textlangle UNIT, UNDERLYING\_TYPE\textrangle\& a}\texttt{,}\\
+\hphantom{\texttt{operator*}\texttt{(}}\texttt{UNDERLYING\_TYPE s)}\\
+
+\subsection{Non members}
+\subsubsection{Angle Functors}
+The library provides partial specializations of \texttt{cos\_functor}, \texttt{cot\_functor},
+\texttt{sin\_functor}, and \texttt{tan\_functor} for every specialization of \texttt{angle}
+provided by this library.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}

@@ -26,6 +26,10 @@
 #pragma once
 
 #include "primordialmachine/trigonometry/acos.hpp"
+#include "primordialmachine/trigonometry/angle.hpp"
+#include "primordialmachine/trigonometry/angle_degrees.hpp"
+#include "primordialmachine/trigonometry/angle_radians.hpp"
+#include "primordialmachine/trigonometry/angle_turns.hpp"
 #include "primordialmachine/trigonometry/angle_unit_degrees.hpp"
 #include "primordialmachine/trigonometry/angle_unit_radians.hpp"
 #include "primordialmachine/trigonometry/angle_unit_turns.hpp"

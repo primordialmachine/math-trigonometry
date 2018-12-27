@@ -54,6 +54,7 @@
     <TargetName>trigonometry-test</TargetName>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="sources\angle_test.cpp" />
     <ClCompile Include="sources\pi_test.cpp" />
   </ItemGroup>
   <ItemGroup>
