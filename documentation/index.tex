@@ -343,13 +343,58 @@ Compute the product of an angle and a scalar.\\
 \subsubsection{\texttt{operator/}}
 Compute the quotient of an angle and a scalar.\\
 
-\noindent\texttt{angle\textlangle UNIT, UNDERLLYING\_TYPE\textrangle}\\
+\noindent\texttt{angle\textlangle UNIT, UNDERLYING\_TYPE\textrangle}\\
 \texttt{operator*}\texttt{(}\texttt{UNDERLYING\_TYPE s}\texttt{,}\\
 \hphantom{\texttt{operator*}\texttt{(}}\texttt{const angle\textlangle UNIT, UNDERLYING\_TYPE\textrangle\& a)}\texttt{)}\\
 
 \noindent\texttt{angle\textlangle UNIT, UNDERLYING\_TYPE\textrangle}\\
 \texttt{operator/}\texttt{(}\texttt{const angle\textlangle UNIT, UNDERLYING\_TYPE\textrangle\& a}\texttt{,}\\
 \hphantom{\texttt{operator*}\texttt{(}}\texttt{UNDERLYING\_TYPE s)}\\
+
+\subsection{\texttt{to\_degrees}}
+Get the angle in degrees.\\
+
+\noindent\texttt{T}\\
+\texttt{to\_degrees}\texttt{()} const\\
+
+\noindent{}Returns a value of type $T$ where $T$ is either
+\texttt{angle\textlangle angle\_unit\_degrees, UNDERLYING\_TYPE\textrangle}
+or a reference to a constant value of that type.
+
+\subsection{\texttt{to\_radians}}
+Get the angle in radians.\\
+
+\noindent\texttt{T}\\
+\texttt{to\_radians}\texttt{()} const\\
+
+\noindent{}Returns a value of type $T$ where $T$ is either
+\texttt{angle\textlangle angle\_unit\_radians, UNDERLYING\_TYPE\textrangle}
+or a reference to a constant value of that type.
+
+\subsection{\texttt{to\_turns}}
+Get the angle in turns.\\
+
+\noindent\texttt{T}\\
+\texttt{to\_turns}\texttt{()} const\\
+
+\noindent{}Returns a value of type $T$ where $T$ is either
+\texttt{angle\textlangle angle\_unit\_turns, UNDERLYING\_TYPE\textrangle}
+or a reference to a constant value of that type.
+
+\subsection{\texttt{value}}
+Get the value of thisangle in turns.\\
+
+\noindent\texttt{T}\\
+\texttt{value() const} (1)\\
+
+\noindent\texttt{T}\\
+\texttt{value(T v)} (2)\\
+
+\noindent{}(1) Get the value of this \textit{angle} object. \texttt{T} is either a value of type
+\texttt{UNDERLYING\_TYPE} or a reference to a constant value of that type.\\
+
+\noindent{}(2) Set the value of this \textit{angle} object. \texttt{T} is either value of type
+\texttt{UNDERLYING\_TYPE} or a reference to a constant value of that type.\\
 
 \subsection{Non members}
 \subsubsection{Angle Functors}
