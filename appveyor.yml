@@ -45,14 +45,19 @@ install:
   - IF NOT EXIST "%MIKTEX_FILENAME%" (appveyor DownloadFile "%MIKTEX_URL%" -FileName "%MIKTEX_FILENAME%")
   - IF EXIST "%MIKTEX_INSTALL_PATH%" (ECHO "using cached MikTex")
   - IF NOT EXIST "%MIKTEX_INSTALL_PATH%" (7z x "%MIKTEX_FILENAME%" -o"%MIKTEX_INSTALL_PATH%" > nul)
-  - set "PATH=%PATH%;%MIKTEX_INSTALL_PATH%\miktex\bin"
+  - set "PATH=%PATH%;%MIKTEX_INSTALL_PATH%\texmfs\install\miktex\bin"
+  - initexmf --set-config-value "[MPM]AutoInstall=1" 
 
 before_build:
   - nuget restore         # Restore NuGet packages.
 
-build:
-  parallel: true          # Enable parallel builds.
-  project: solution.sln   # Path to Visual Studio solution.
+build_script:
+  - ps: |
+      msbuild solution.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - cmd: |
+      cd documentation
+      latexmk -pdf index.tex
+      cd ..
 
 test_script:
   - ps: |
