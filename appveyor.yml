@@ -79,7 +79,9 @@ environment:
   ORGANIZATION_NAME: "Primordial Machine"
   # Package (canonical) name.
   PACKAGE_CANONICAL_NAME : "math-trigonometry"
-  PACKAGE_NAME: "Math Matrices"
+  PACKAGE_NAME: "Math Trigonometry"
+  # Pakcage category.
+  PACKAGE_CATEGORY: "library"
   # Environment variables pertaining to GoogleTestAdapter.
   GOOGLETESTADAPTER_FILENAME : "GoogleTestAdapter-0.14.0.vsix"
   GOOGLETESTADAPTER_URL : "https://github.com/csoltenborn/GoogleTestAdapter/releases/download/v0.14.0/GoogleTestAdapter-0.14.0.vsix"
