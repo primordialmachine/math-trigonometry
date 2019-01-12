@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Primordial Machine's Trigonometry Library
-// Copyright (C) 2017-2018 Michael Heilmann
+// Primordial Machine's Math Trigonometry Library
+// Copyright (C) 2017-2019 Michael Heilmann
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the
@@ -25,46 +25,11 @@
 
 #pragma once
 
+#include "primordialmachine/math/trigonometry/angle_unit.hpp"
+
 namespace primordialmachine {
 
-template<typename T, typename E = void>
-struct pi_functor;
-
-template<typename T>
-auto
-pi() -> decltype(pi_functor<T, void>()())
-{
-  return pi_functor<T, void>()();
-}
-
-// TODO: Can we use more digits?
-template<>
-struct pi_functor<float, void>
-{
-  float operator()() const
-  {
-    return 3.141592653589793238462643383279502884197169399375105820974944592F;
-  }
-}; // struct pi_functor
-
-// TODO: Can we use more digits?
-template<>
-struct pi_functor<double, void>
-{
-  double operator()() const
-  {
-    return 3.141592653589793238462643383279502884197169399375105820974944592;
-  }
-}; // struct pi_functor
-
-// TODO: Can we use more digits?
-template<>
-struct pi_functor<long double, void>
-{
-  long double operator()() const
-  {
-    return 3.141592653589793238462643383279502884197169399375105820974944592L;
-  }
-}; // struct pi_functor
+struct angle_unit_radians : public internal::angle_unit
+{};
 
 } // namespace primordialmachine

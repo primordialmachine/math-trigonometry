@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Primordial Machine's Trigonometry Library
-// Copyright (C) 2017-2018 Michael Heilmann
+// Primordial Machine's Math Trigonometry Library
+// Copyright (C) 2017-2019 Michael Heilmann
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the
@@ -25,25 +25,25 @@
 
 #pragma once
 
-#include "primordialmachine/one_zero_functors/include.hpp"
-#include "primordialmachine/trigonometry/tan.hpp"
+#include <cmath>
+#include <type_traits>
 
 namespace primordialmachine {
 
 template<typename T, typename E = void>
-struct cot_functor;
+struct cos_functor;
 
 template<typename T>
 auto
-cot(const T& v) -> decltype(cot_functor<T, void>()(v))
+cos(const T& v) -> decltype(cos_functor<T, void>()(v))
 {
-  return cot_functor<T, void>()(v);
+  return cos_functor<T, void>()(v);
 }
 
 template<typename T>
-struct cot_functor<T, std::enable_if_t<std::is_floating_point_v<T>>>
+struct cos_functor<T, std::enable_if_t<std::is_floating_point_v<T>>>
 {
-  T operator()(T x) const { return one<T>() / tan(x); }
-}; // struct cot_functor
+  T operator()(T v) const { return std::cos(v); }
+}; // struct cos_functor
 
 } // namespace primordialmachine

@@ -1,17 +1,65 @@
-\documentclass[oneside]{report}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Primordial Machine's Math Trigonometry Library
+% Copyright (C) 2017-2019 Michael Heilmann
+%
+% This software is provided 'as-is', without any express or implied warranty.
+% In no event will the authors be held liable for any damages arising from the
+% use of this software.
+%
+% Permission is granted to anyone to use this software for any purpose,
+% including commercial applications, and to alter it and redistribute it
+% freely, subject to the following restrictions:
+%
+% 1. The origin of this software must not be misrepresented;
+%    you must not claim that you wrote the original software.
+%    If you use this software in a product, an acknowledgment
+%    in the product documentation would be appreciated but is not required.
+%
+% 2. Altered source versions must be plainly marked as such,
+%    and must not be misrepresented as being the original software.
+%
+% 3. This notice may not be removed or altered from any source distribution.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[oneside]{book}
+
 \input{common}
 
 \SetOrganization{Primordial Machine's}
-\SetLibraryName{Trigonometry Library}
-\SetLibraryVersion{v1.2}
-\SetLibraryRepository{https://github.com/primordialmachine/trigonometry}
+\SetLibraryName{Math Trigonometry Library}
+
+\SetLibraryIncludeFileName{include.hpp}
+\SetLibraryIncludesDirectoryPath{primordialmachine/math-trigonometry/\newline\$(PlatformTarget.toLower())/\$(Configuration.toLower())/includes}
+
+\SetLibraryIncludeDirectiveFilePath{primordialmachine/math/trigonometry/include.hpp}
+
+\SetLibraryStaticLibrariesDirectoryPath{primordialmachine/math-trigonometry/\newline\$(PlatformTarget.toLower())/\$(Configuration.toLower())/libraries}
+\SetLibraryStaticLibraryFileName{math-trigonometry.lib}
+
+\SetLibraryVersion{v1.3}
+\SetLibraryRepository{https://github.com/primordialmachine/math-trigonometry}
 \SetAuthor{Michael Heilmann}
 \SetEmail{michaelheilmann@primordialmachine.com}
 
+\SetDocumentType{User Manual}
+
 \begin{document}
+
+\frontmatter
+
+\begin{titlepage}
 \maketitle
+\end{titlepage}
+
 \tableofcontents
-\section{Synopsis}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\pagenumbering{gobble}
+
+\mainmatter
+
+\chapter{Synopsis}
 C++ 17 library providing functionality related to trigonometry.
 The library is made available publicly on
 \href{\GetLibraryRepository}{Github}
@@ -31,38 +79,7 @@ The library officially only supports Visual Studio 2017 and Windows 10.
 %\section{Introductory example}
 %Examples are located in the \href{\GetLibraryRepository/blob/master/examples}{examples} directory.
 
-\chapter{Building under Visual Studio 2017}
-\begin{enumerate}
-\item Open the solution \texttt{solution.sln} in Microsoft Visual Studio 2017.
-\item Batch build everything.
-\item The folder \texttt{packages} contains the distribution of the library i.e. include files and the
-      static libraries for
-  \begin{enumerate}
-    \item the platforms \texttt{Win32} and \texttt{x64} and
-    \item configurations \texttt{Release} and \texttt{Debug}.
-  \end{enumerate}
-\item Copy the contents of the \verb+packages+ folder into a directory. Let
-      \verb+[library home]+ be a placeholder denoting the path by which that folder
-      can be referenced from your project.
-\item Add
-  \begin{enumerate}
-    \item the include path
-\begin{verbatim}
-[library home]/primordialmachine/trigonometry/
-$(PlatformTarget.toLower())/$(Configuration.toLower())/includes
-\end{verbatim}
-	and
-    \item the library path
-\begin{verbatim}
-[library home]/primordialmachine/trigonometry/
-$(PlatformTarget.toLower())/$(Configuration.toLower())/libraries
-\end{verbatim}
-    to your project.
-\end{enumerate}
-\item Link your project with the library \verb+trigonometry.lib+.
-\item Add the include directive \verb+#include "primordialmachine/trigonometry/include.hpp"+ where appropriate.
-\item You can now use the functionality provided by the library.
-\end{enumerate}
+\input{building_visual_studio_2017}
 
 \chapter{Library Interface Documentation}
 

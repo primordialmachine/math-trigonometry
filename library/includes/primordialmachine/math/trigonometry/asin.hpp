@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Primordial Machine's Trigonometry Library
-// Copyright (C) 2017-2018 Michael Heilmann
+// Primordial Machine's Math Trigonometry Library
+// Copyright (C) 2017-2019 Michael Heilmann
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the
@@ -25,18 +25,36 @@
 
 #pragma once
 
-#include <type_traits>
+#include <cmath>
 
-namespace primordialmachine::internal {
+namespace primordialmachine {
 
-struct angle_unit
-{};
+template<typename T, typename E = void>
+struct asin_functor;
 
-template<typename TYPE>
-struct is_angle_unit : public std::is_base_of<angle_unit, TYPE>
-{};
+template<typename T>
+auto
+asin(const T& v) -> decltype(asin_functor<T, void>()(v))
+{
+  return asin_functor<T, void>()(v);
+}
 
-template<typename TYPE>
-inline constexpr bool is_angle_unit_v = is_angle_unit<TYPE>::value;
+template<>
+struct asin_functor<float, void>
+{
+  float operator()(float v) const { return std::asin(v); }
+};
 
-} // namespace primordialmachine::internal
+template<>
+struct asin_functor<double, void>
+{
+  double operator()(double v) const { return std::asin(v); }
+};
+
+template<>
+struct asin_functor<long double, void>
+{
+  long double operator()(long double v) const { return std::asin(v); }
+};
+
+} // namespace primordialmachine

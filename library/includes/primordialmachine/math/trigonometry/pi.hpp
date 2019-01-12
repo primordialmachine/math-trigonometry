@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Primordial Machine's Trigonometry Library
-// Copyright (C) 2017-2018 Michael Heilmann
+// Primordial Machine's Math Trigonometry Library
+// Copyright (C) 2017-2019 Michael Heilmann
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the
@@ -25,36 +25,46 @@
 
 #pragma once
 
-#include <cmath>
-
 namespace primordialmachine {
 
 template<typename T, typename E = void>
-struct asin_functor;
+struct pi_functor;
 
 template<typename T>
 auto
-asin(const T& v) -> decltype(asin_functor<T, void>()(v))
+pi() -> decltype(pi_functor<T, void>()())
 {
-  return asin_functor<T, void>()(v);
+  return pi_functor<T, void>()();
 }
 
+// TODO: Can we use more digits?
 template<>
-struct asin_functor<float, void>
+struct pi_functor<float, void>
 {
-  float operator()(float v) const { return std::asin(v); }
-};
+  float operator()() const
+  {
+    return 3.141592653589793238462643383279502884197169399375105820974944592F;
+  }
+}; // struct pi_functor
 
+// TODO: Can we use more digits?
 template<>
-struct asin_functor<double, void>
+struct pi_functor<double, void>
 {
-  double operator()(double v) const { return std::asin(v); }
-};
+  double operator()() const
+  {
+    return 3.141592653589793238462643383279502884197169399375105820974944592;
+  }
+}; // struct pi_functor
 
+// TODO: Can we use more digits?
 template<>
-struct asin_functor<long double, void>
+struct pi_functor<long double, void>
 {
-  long double operator()(long double v) const { return std::asin(v); }
-};
+  long double operator()() const
+  {
+    return 3.141592653589793238462643383279502884197169399375105820974944592L;
+  }
+}; // struct pi_functor
 
 } // namespace primordialmachine

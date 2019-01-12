@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Primordial Machine's Trigonometry Library
-// Copyright (C) 2017-2018 Michael Heilmann
+// Primordial Machine's Math Trigonometry Library
+// Copyright (C) 2017-2019 Michael Heilmann
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the
@@ -25,25 +25,11 @@
 
 #pragma once
 
-#include <cmath>
-#include <type_traits>
+#include "primordialmachine/math/trigonometry/angle_unit.hpp"
 
 namespace primordialmachine {
 
-template<typename T, typename E = void>
-struct cos_functor;
-
-template<typename T>
-auto
-cos(const T& v) -> decltype(cos_functor<T, void>()(v))
-{
-  return cos_functor<T, void>()(v);
-}
-
-template<typename T>
-struct cos_functor<T, std::enable_if_t<std::is_floating_point_v<T>>>
-{
-  T operator()(T v) const { return std::cos(v); }
-}; // struct cos_functor
+struct angle_unit_turns : public internal::angle_unit
+{};
 
 } // namespace primordialmachine

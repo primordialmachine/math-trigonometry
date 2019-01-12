@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Primordial Machine's Trigonometry Library
-// Copyright (C) 2017-2018 Michael Heilmann
+// Primordial Machine's Math Trigonometry Library
+// Copyright (C) 2017-2019 Michael Heilmann
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the
@@ -25,17 +25,11 @@
 
 #pragma once
 
-#include "primordialmachine/trigonometry/acos.hpp"
-#include "primordialmachine/trigonometry/angle.hpp"
-#include "primordialmachine/trigonometry/angle_degrees.hpp"
-#include "primordialmachine/trigonometry/angle_radians.hpp"
-#include "primordialmachine/trigonometry/angle_turns.hpp"
-#include "primordialmachine/trigonometry/angle_unit_degrees.hpp"
-#include "primordialmachine/trigonometry/angle_unit_radians.hpp"
-#include "primordialmachine/trigonometry/angle_unit_turns.hpp"
-#include "primordialmachine/trigonometry/asin.hpp"
-#include "primordialmachine/trigonometry/cos.hpp"
-#include "primordialmachine/trigonometry/cot.hpp"
-#include "primordialmachine/trigonometry/pi.hpp"
-#include "primordialmachine/trigonometry/sin.hpp"
-#include "primordialmachine/trigonometry/tan.hpp"
+#include "primordialmachine/math/trigonometry/angle_unit.hpp"
+
+namespace primordialmachine {
+
+struct angle_unit_degrees : public internal::angle_unit
+{};
+
+} // namespace primordialmachine

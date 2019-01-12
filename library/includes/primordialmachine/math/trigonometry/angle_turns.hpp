@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Primordial Machine's Trigonometry Library
-// Copyright (C) 2017-2018 Michael Heilmann
+// Primordial Machine's Math Trigonometry Library
+// Copyright (C) 2017-2019 Michael Heilmann
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the
@@ -26,10 +26,10 @@
 #pragma once
 
 #include "primordialmachine/one_zero_functors/include.hpp"
-#include "primordialmachine/trigonometry/angle.hpp"
-#include "primordialmachine/trigonometry/angle_unit_degrees.hpp"
-#include "primordialmachine/trigonometry/angle_unit_radians.hpp"
-#include "primordialmachine/trigonometry/angle_unit_turns.hpp"
+#include "primordialmachine/math/trigonometry/angle.hpp"
+#include "primordialmachine/math/trigonometry/angle_unit_degrees.hpp"
+#include "primordialmachine/math/trigonometry/angle_unit_radians.hpp"
+#include "primordialmachine/math/trigonometry/angle_unit_turns.hpp"
 #include <type_traits>
 
 namespace primordialmachine {

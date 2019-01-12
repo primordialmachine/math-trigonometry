@@ -1,6 +1,6 @@
 ###################################################################################################
 #
-# Primordial Machine's Trigonometry Library
+# Primordial Machine's Math Trigonometry Library
 # Copyright (C) 2017-2019 Michael Heilmann
 #
 # This software is provided 'as-is', without any express or implied warranty.
@@ -28,7 +28,7 @@
 #   Example: 'primordialmachine'.
 # PACKAGE_NAME
 #   The name of the published package.
-#   Example: 'arithmetic-functors'.
+#   Example: 'math-trigonometry'.
 # CONFIGURATION:
 #   The configuration.
 #   Example: 'release'.
@@ -37,10 +37,10 @@
 #   Example: 'x64'.
 # ARTIFACT_FILENAME
 #   The file name of the artifact.
-#   Example: 'primordialmachine-arithmetic-functors-release-x64.zip'.
+#   Example: 'primordialmachine-math-trigonometry-release-x64.zip'.
 # ARTIFACT_NAME
 #   The name of the artifact.
-#   Example: 'primordialmachine-arithmetic-functors-release-x64'.
+#   Example: 'primordialmachine-math-trigonometry-release-x64'.
 #
 # GOOGLETESTADAPTER_FILENAME
 #   The filename of the archive of GoogleTestAdapter.
@@ -50,10 +50,10 @@
 #   Example: 'https://github.com/csoltenborn/GoogleTestAdapter/releases/download/v0.14.0/GoogleTestAdapter-0.14.0.vsix'.
 # MIKTEX_FILENAME
 #   The filename of the archive of MikTex.
-#   Example: 'miktex-portable-2.9.6753.exe'.
+#   Example: 'miktex-portable-2.9.6942.exe'.
 # MIKTEX_URL
 #   The URL of the archive of MikTex.
-#   Example: 'https://miktex.org/download/ctan/systems/win32/miktex/setup/windows-x86/miktex-portable-2.9.6753.exe'.
+#   Example: 'https://miktex.org/download/ctan/systems/win32/miktex/setup/windows-x86/miktex-portable-2.9.6942.exe'.
 
 clone_depth: 1
 
@@ -74,8 +74,12 @@ configuration:
 
 environment:
   # Environment variables pertaining to the organization and package.
-  ORGANIZATION_NAME : "primordialmachine"
-  PACKAGE_NAME : "trigonometry"
+  # Organization (canonical) name.
+  ORGANIZATION_CANONICAL_NAME : "primordialmachine"
+  ORGANIZATION_NAME: "Primordial Machine"
+  # Package (canonical) name.
+  PACKAGE_CANONICAL_NAME : "math-trigonometry"
+  PACKAGE_NAME: "Math Matrices"
   # Environment variables pertaining to GoogleTestAdapter.
   GOOGLETESTADAPTER_FILENAME : "GoogleTestAdapter-0.14.0.vsix"
   GOOGLETESTADAPTER_URL : "https://github.com/csoltenborn/GoogleTestAdapter/releases/download/v0.14.0/GoogleTestAdapter-0.14.0.vsix"
@@ -94,6 +98,11 @@ cache:
   - "%MIKTEX_INSTALL_PATH% -> appveyor-develop.yml"
 
 install:
+  # If repo tag of the proper format is given, extract the version number.
+  - ps: |
+      if ($env:APPVEYOR_REPO_TAG -and $($env:APPVEYOR_REPO_TAG_NAME -match "version_[0-9][0-9]*\.[0-9][0-9]*")) {
+         $env:version = $env:appveyor_repo_tag_name -replace "version_", ""
+      }
   # Download and install GoogleTestAdapter.
   # Use cached archives/installations if possible.
   - IF NOT EXIST "%GOOGLETESTADAPTER_FILENAME%" (appveyor DownloadFile "%GOOGLETESTADAPTER_URL%" -FileName "%GOOGLETESTADAPTER_FILENAME%")
@@ -105,14 +114,22 @@ install:
   - IF EXIST "%MIKTEX_INSTALL_PATH%" (ECHO "using cached MikTex")
   - IF NOT EXIST "%MIKTEX_INSTALL_PATH%" (7z x "%MIKTEX_FILENAME%" -o"%MIKTEX_INSTALL_PATH%" > nul)
   - set "PATH=%PATH%;%MIKTEX_INSTALL_PATH%\texmfs\install\miktex\bin"
-  - initexmf --set-config-value "[MPM]AutoInstall=1" 
+  - initexmf --set-config-value "[MPM]AutoInstall=1"
 
 before_build:
   - nuget restore         # Restore NuGet packages.
   - ps: |
-      $env:ARTIFACT_NAME="$($env:ORGANIZATION_NAME.tolower())-$($env:PACKAGE_NAME.tolower())-$($env:configuration.tolower())-$($env:platform.tolower())"
+      if (Test-Path env:version) {
+        $env:ARTIFACT_NAME="$($env:ORGANIZATION_CANONICAL_NAME.tolower())-$($env:PACKAGE_CANONICAL_NAME.tolower())-v$($env:version.tolower())-$($env:configuration.tolower())-$($env:platform.tolower())"
+      } else {
+        $env:ARTIFACT_NAME="$($env:ORGANIZATION_CANONICAL_NAME.tolower())-$($env:PACKAGE_CANONICAL_NAME.tolower())-$($env:configuration.tolower())-$($env:platform.tolower())"    
+      }
       $env:ARTIFACT_FILENAME="$($env:ARTIFACT_NAME).zip"
-      $env:DOCUMENTATION_ARTIFACT_NAME="$($env:ORGANIZATION_NAME.tolower())-$($env:PACKAGE_NAME.tolower())-$($env:configuration.tolower())-$($env:platform.tolower())"
+      if (Test-Path env:version) {
+        $env:DOCUMENTATION_ARTIFACT_NAME="$($env:ORGANIZATION_CANONICAL_NAME.tolower())-$($env:PACKAGE_CANONICAL_NAME.tolower())-v$($env:version.tolower())-$($env:configuration.tolower())-$($env:platform.tolower())"
+      } else {
+        $env:DOCUMENTATION_ARTIFACT_NAME="$($env:ORGANIZATION_CANONICAL_NAME.tolower())-$($env:PACKAGE_CANONICAL_NAME.tolower())-$($env:configuration.tolower())-$($env:platform.tolower())"
+      }
       $env:DOCUMENTATION_ARTIFACT_FILENAME="$($env:DOCUMENTATION_ARTIFACT_NAME).pdf"
 
 build_script:
@@ -126,7 +143,7 @@ build_script:
 after_build:
    - ps: |
        cd packages
-       7z a $env:ARTIFACT_FILENAME $($env:ORGANIZATION_NAME.tolower())
+       7z a $env:ARTIFACT_FILENAME $($env:ORGANIZATION_CANONICAL_NAME.tolower())
        Move-Item -Path ./$env:ARTIFACT_FILENAME -Destination ./../$env:ARTIFACT_FILENAME
        cd ..
    - ps: |
@@ -138,7 +155,7 @@ test_script:
       $configuration=$env:configuration
       $platform=$env:platform
       $testAdapterPath="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\GoogleTestAdapter-0.14.0"
-      $testPath="products\test\$platform\$configuration\$($env:PACKAGE_NAME.tolower())-test.exe"
+      $testPath="products\test\$platform\$configuration\$($env:PACKAGE_CANONICAL_NAME.tolower())-test.exe"
       vstest.console /Logger:$logger /Platform:$platform /TestAdapterPath:$testAdapterPath /inIsolation $testPath
 
 artifacts:
@@ -154,8 +171,9 @@ notifications:
 
 # GitHub Prerelease.
 deploy:
-  release: "Automatic Prerelease from AppVeyor Build $(appveyor_build_version)"
-  description: "Automatic Prerelease from AppVeyor Build $(appveyor_build_version) of\n branch 'master' and tag '$(appveyor_repo_tag_name)'."
+  tag: "$(appveyor_repo_tag_name)"
+  release: "Version $(version)"
+  description: "Version $(version) of $(organization_name)'s $(package_name) $(package_category)."
   provider: GitHub
   auth_token:
     secure: 46x+mlkXPA9TkpptTOTfkhkmDrswaZvDrwUFPLFCCNcbL3lh98gFpxnGgO5eW2eT # Encrypted personal access token.
