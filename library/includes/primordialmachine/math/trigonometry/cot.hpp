@@ -25,25 +25,18 @@
 
 #pragma once
 
+#include "primordialmachine/trigonometric_functors/include.hpp"
 #include "primordialmachine/one_zero_functors/include.hpp"
-#include "primordialmachine/math/trigonometry/tan.hpp"
 
 namespace primordialmachine {
 
-template<typename T, typename E = void>
-struct cot_functor;
-
 template<typename T>
-auto
-cot(const T& v) -> decltype(cot_functor<T, void>()(v))
+struct cot_functor<T, enable_if_t<is_floating_point_v<T>>>
 {
-  return cot_functor<T, void>()(v);
-}
-
-template<typename T>
-struct cot_functor<T, std::enable_if_t<std::is_floating_point_v<T>>>
-{
-  T operator()(T x) const { return one<T>() / tan(x); }
+  T operator()(T x) const noexcept(noexcept(one<T>() / tan(x))) 
+  {
+    return one<T>() / tan(x);
+  }
 }; // struct cot_functor
 
 } // namespace primordialmachine

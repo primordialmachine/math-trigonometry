@@ -25,25 +25,19 @@
 
 #pragma once
 
+#include "primordialmachine/functors/include.hpp"
+#include "primordialmachine/trigonometric_functors/include.hpp"
 #include <cmath>
-#include <type_traits>
 
 namespace primordialmachine {
 
-template<typename T, typename E = void>
-struct cos_functor;
-
 template<typename T>
-auto
-cos(const T& v) -> decltype(cos_functor<T, void>()(v))
+struct cos_functor<T, enable_if_t<is_floating_point_v<T>>>
 {
-  return cos_functor<T, void>()(v);
-}
-
-template<typename T>
-struct cos_functor<T, std::enable_if_t<std::is_floating_point_v<T>>>
-{
-  T operator()(T v) const { return std::cos(v); }
+  T operator()(T v) const noexcept(noexcept(std::cos(v)))
+  {
+    return std::cos(v);
+  }
 }; // struct cos_functor
 
 } // namespace primordialmachine

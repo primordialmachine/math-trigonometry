@@ -29,9 +29,22 @@
   <ItemGroup>
     <ClInclude Include="includes\primordialmachine\math\trigonometry\acos.hpp" />
     <ClInclude Include="includes\primordialmachine\math\trigonometry\angle.hpp" />
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\binary_minus_angle_angle.hpp" />
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\binary_plus_angle_angle.hpp" />
     <ClInclude Include="includes\primordialmachine\math\trigonometry\angle_degrees.hpp" />
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\equal_to_angle_angle.hpp" />
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\minus_assignment_angle_angle.hpp" />
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\not_equal_to_angle_angle.hpp" />
     <ClInclude Include="includes\primordialmachine\math\trigonometry\angle_radians.hpp" />
     <ClInclude Include="includes\primordialmachine\math\trigonometry\angle_turns.hpp" />
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\binary_slash_angle_scalar.hpp" />
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\binary_star_angle_scalar.hpp" />
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\binary_star_scalar_angle.hpp" />
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\plus_assignment_angle_angle.hpp" />
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\slash_assignment_angle_scalar.hpp" />
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\star_assignment_angle_scalar.hpp" />
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\unary_minus_angle.hpp" />
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\unary_plus_angle.hpp" />
     <ClInclude Include="includes\primordialmachine\math\trigonometry\angle_unit.hpp" />
     <ClInclude Include="includes\primordialmachine\math\trigonometry\angle_unit_degrees.hpp" />
     <ClInclude Include="includes\primordialmachine\math\trigonometry\angle_unit_radians.hpp" />
@@ -48,7 +61,8 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{88CF2EB1-2E80-488D-95C1-B21102055B87}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>byteorder</RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -137,18 +151,27 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <OpenMPSupport>false</OpenMPSupport>
       <EnableModules>false</EnableModules>
-      <AdditionalIncludeDirectories>$(ProjectDir)includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)includes;$(SolutionDir)external\primordialmachine\arithmetic-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\trigonometric-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\errors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\relational-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\math-scalars\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes</AdditionalIncludeDirectories>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ControlFlowGuard>Guard</ControlFlowGuard>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <CustomBuildStep>
-      <Command>xcopy $(ProjectDir)includes $(PackageDir)includes\ /S /E /Y
-xcopy $(OutDir)*.lib $(PackageDir)libraries\ /S /E /Y</Command>
+      <Command>xcopy $(ProjectDir)includes $(PackageTargetDir)includes\ /S /E /Y
+xcopy $(OutDir)*.lib $(PackageTargetDir)libraries\ /S /E /Y</Command>
       <Message>Create package.</Message>
-      <Outputs>$(PackageDir)includes\primordialmachine\math\trigonometry\angle_unit_degrees.hpp</Outputs>
-      <Inputs>$(ProjectDir)includes\primordialmachine\math\trigonometry\angle_unit_degrees.hpp</Inputs>
+      <Outputs>$(PackageTargetFiles)</Outputs>
+      <Inputs>$(PackageSourceFiles)</Inputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -164,18 +187,28 @@ xcopy $(OutDir)*.lib $(PackageDir)libraries\ /S /E /Y</Command>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <OpenMPSupport>false</OpenMPSupport>
       <EnableModules>false</EnableModules>
-      <AdditionalIncludeDirectories>$(ProjectDir)includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)includes;$(SolutionDir)external\primordialmachine\arithmetic-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\trigonometric-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\errors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\relational-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\math-scalars\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes</AdditionalIncludeDirectories>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ControlFlowGuard>Guard</ControlFlowGuard>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <OmitFramePointers>false</OmitFramePointers>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <CustomBuildStep>
-      <Command>xcopy $(ProjectDir)includes $(PackageDir)includes\ /S /E /Y
-xcopy $(OutDir)*.lib $(PackageDir)libraries\ /S /E /Y</Command>
+      <Command>xcopy $(ProjectDir)includes $(PackageTargetDir)includes\ /S /E /Y
+xcopy $(OutDir)*.lib $(PackageTargetDir)libraries\ /S /E /Y</Command>
       <Message>Create package.</Message>
-      <Inputs>$(ProjectDir)includes\primordialmachine\math\trigonometry\angle_unit_degrees.hpp</Inputs>
-      <Outputs>$(PackageDir)includes\primordialmachine\math\trigonometry\angle_unit_degrees.hpp</Outputs>
+      <Inputs>$(PackageSourceFiles)</Inputs>
+      <Outputs>$(PackageTargetFiles)</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -183,9 +216,9 @@ xcopy $(OutDir)*.lib $(PackageDir)libraries\ /S /E /Y</Command>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -193,7 +226,19 @@ xcopy $(OutDir)*.lib $(PackageDir)libraries\ /S /E /Y</Command>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <OpenMPSupport>false</OpenMPSupport>
       <EnableModules>false</EnableModules>
-      <AdditionalIncludeDirectories>$(ProjectDir)includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)includes;$(SolutionDir)external\primordialmachine\arithmetic-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\trigonometric-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\errors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\relational-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\math-scalars\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes</AdditionalIncludeDirectories>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -202,11 +247,11 @@ xcopy $(OutDir)*.lib $(PackageDir)libraries\ /S /E /Y</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <CustomBuildStep>
-      <Command>xcopy $(ProjectDir)includes $(PackageDir)includes\ /S /E /Y
-xcopy $(OutDir)*.lib $(PackageDir)libraries\ /S /E /Y</Command>
+      <Command>xcopy $(ProjectDir)includes $(PackageTargetDir)includes\ /S /E /Y
+xcopy $(OutDir)*.lib $(PackageTargetDir)libraries\ /S /E /Y</Command>
       <Message>Create package.</Message>
-      <Inputs>$(ProjectDir)includes\primordialmachine\math\trigonometry\angle_unit_degrees.hpp;$(ProjectDir)includes\primordialmachine\math\trigonometry\angle_unit_radians.hpp;$(ProjectDir)includes\primordialmachine\math\trigonometry\angle_unit_turns.hpp;$(ProjectDir)includes\primordialmachine\math\trigonometry\angle_unit.hpp;$(ProjectDir)includes\primordialmachine\math\trigonometry\include.hpp;$(ProjectDir)includes\primordialmachine\math\trigonometry\pi.hpp;$(ProjectDir)includes\primordialmachine\math\trigonometry\sin.hpp;$(ProjectDir)includes\primordialmachine\math\trigonometry\cos.hpp;$(ProjectDir)includes\primordialmachine\math\trigonometry\cot.hpp;$(ProjectDir)includes\primordialmachine\math\trigonometry\tan.hpp;$(ProjectDir)includes\primordialmachine\math\trigonometry\acos.hpp;$(ProjectDir)includes\primordialmachine\math\trigonometry\asin.hpp;$(ProjectDir)includes\primordialmachine\math\trigonometry\angle.hpp;$(ProjectDir)includes\primordialmachine\math\trigonometry\angle_degrees.hpp;$(ProjectDir)includes\primordialmachine\math\trigonometry\angle_radians.hpp;$(ProjectDir)includes\primordialmachine\math\trigonometry\angle_turns.hpp</Inputs>
-      <Outputs>$(PackageDir)includes\primordialmachine\math\trigonometry\angle_unit_degrees.hpp;$(PackageDir)includes\primordialmachine\math\trigonometry\angle_unit_radians.hpp;$(PackageDir)includes\primordialmachine\math\trigonometry\angle_unit_turns.hpp;$(PackageDir)includes\primordialmachine\math\trigonometry\angle_unit.hpp;$(PackageDir)includes\primordialmachine\math\trigonometry\include.hpp;$(PackageDir)includes\primordialmachine\math\trigonometry\pi.hpp;$(PackageDir)includes\primordialmachine\math\trigonometry\sin.hpp;$(PackageDir)includes\primordialmachine\math\trigonometry\cos.hpp;$(PackageDir)includes\primordialmachine\math\trigonometry\cot.hpp;$(PackageDir)includes\primordialmachine\math\trigonometry\tan.hpp;$(PackageDir)includes\primordialmachine\math\trigonometry\acos.hpp;$(PackageDir)includes\primordialmachine\math\trigonometry\asin.hpp;$(PackageDir)includes\primordialmachine\math\trigonometry\angle.hpp;$(PackageDir)includes\primordialmachine\math\trigonometry\angle_degrees.hpp;$(PackageDir)includes\primordialmachine\math\trigonometry\angle_radians.hpp;$(PackageDir)includes\primordialmachine\math\trigonometry\angle_turns.hpp</Outputs>
+      <Inputs>$(PackageSourceFiles)</Inputs>
+      <Outputs>$(PackageTargetFiles)</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -214,9 +259,9 @@ xcopy $(OutDir)*.lib $(PackageDir)libraries\ /S /E /Y</Command>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -224,7 +269,19 @@ xcopy $(OutDir)*.lib $(PackageDir)libraries\ /S /E /Y</Command>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <OpenMPSupport>false</OpenMPSupport>
       <EnableModules>false</EnableModules>
-      <AdditionalIncludeDirectories>$(ProjectDir)includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)includes;$(SolutionDir)external\primordialmachine\arithmetic-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\trigonometric-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\errors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\relational-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\math-scalars\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes</AdditionalIncludeDirectories>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -233,11 +290,11 @@ xcopy $(OutDir)*.lib $(PackageDir)libraries\ /S /E /Y</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <CustomBuildStep>
-      <Command>xcopy $(ProjectDir)includes $(PackageDir)includes\ /S /E /Y
-xcopy $(OutDir)*.lib $(PackageDir)libraries\ /S /E /Y</Command>
+      <Command>xcopy $(ProjectDir)includes $(PackageTargetDir)includes\ /S /E /Y
+xcopy $(OutDir)*.lib $(PackageTargetDir)libraries\ /S /E /Y</Command>
       <Message>Create package.</Message>
-      <Inputs>$(ProjectDir)includes\primordialmachine\math\trigonometry\angle_unit_degrees.hpp</Inputs>
-      <Outputs>$(PackageDir)includes\primordialmachine\math\trigonometry\angle_unit_degrees.hpp</Outputs>
+      <Inputs>$(PackageSourceFiles)</Inputs>
+      <Outputs>$(PackageTargetFiles)</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

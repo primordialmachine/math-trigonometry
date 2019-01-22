@@ -62,6 +62,45 @@
     <ClInclude Include="includes\primordialmachine\math\trigonometry\sin.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\binary_minus_angle_angle.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\binary_plus_angle_angle.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\unary_minus_angle.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\unary_plus_angle.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\binary_slash_angle_scalar.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\binary_star_angle_scalar.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\binary_star_scalar_angle.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\not_equal_to_angle_angle.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\equal_to_angle_angle.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\minus_assignment_angle_angle.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\plus_assignment_angle_angle.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\slash_assignment_angle_scalar.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\primordialmachine\math\trigonometry\star_assignment_angle_scalar.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\primordialmachine\math\trigonometry\include.cpp">

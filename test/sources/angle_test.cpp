@@ -26,9 +26,10 @@
 #include "primordialmachine/math/trigonometry/include.hpp"
 #include "gtest/gtest.h"
 
-TEST(trigonometry_test, angle_test)
+namespace primordialmachine {
+
+TEST(trigonometry_tests, angle_tests)
 {
-  using namespace primordialmachine;
   using degrees = angle<angle_unit_degrees, float>;
   using radians = angle<angle_unit_radians, float>;
   using turns = angle<angle_unit_turns, float>;
@@ -42,3 +43,5 @@ TEST(trigonometry_test, angle_test)
   (turns(0.f)).to_radians();
   (turns(0.f)).to_turns();
 }
+
+} // namespace primordialmachine

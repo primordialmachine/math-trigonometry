@@ -3,7 +3,10 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
     <PackageName>math-trigonometry</PackageName>
-    <PackageDir>$(SolutionDir)packages\primordialmachine\$(PackageName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</PackageDir>
+    <PackageTargetDir>$(SolutionDir)packages\primordialmachine\$(PackageName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</PackageTargetDir>
+    <PackageSourceDir>$(ProjectDir)</PackageSourceDir>
+    <PackageSourceFiles>$(PackageSourceDir)includes\primordialmachine\math\trigonometry\angle_unit_degrees.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\angle_unit_radians.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\angle_unit_turns.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\angle_unit.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\include.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\pi.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\sin.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\cos.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\cot.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\tan.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\acos.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\asin.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\angle.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\angle_degrees.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\angle_radians.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\angle_turns.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\binary_plus_angle_angle.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\binary_minus_angle_angle.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\unary_plus_angle.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\binary_star_angle_scalar.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\binary_star_scalar_angle.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\binary_slash_angle_scalar.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\unary_minus_angle.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\equal_to_angle_angle.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\not_equal_to_angle_angle.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\plus_assignment_angle_angle.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\minus_assignment_angle_angle.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\star_assignment_angle_scalar.hpp;$(PackageSourceDir)includes\primordialmachine\math\trigonometry\slash_assignment_angle_scalar.hpp</PackageSourceFiles>
+    <PackageTargetFiles>$(PackageTargetDir)includes\primordialmachine\math\trigonometry\angle_unit_degrees.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\angle_unit_radians.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\angle_unit_turns.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\angle_unit.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\include.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\pi.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\sin.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\cos.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\cot.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\tan.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\acos.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\asin.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\angle.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\angle_degrees.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\angle_radians.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\angle_turns.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\binary_plus_angle_angle.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\binary_minus_angle_angle.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\unary_plus_angle.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\binary_star_angle_scalar.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\binary_star_scalar_angle.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\binary_slash_angle_scalar.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\unary_minus_angle.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\equal_to_angle_angle.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\not_equal_to_angle_angle.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\plus_assignment_angle_angle.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\minus_assignment_angle_angle.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\star_assignment_angle_scalar.hpp;$(PackageTargetDir)includes\primordialmachine\math\trigonometry\slash_assignment_angle_scalar.hpp</PackageTargetFiles>
   </PropertyGroup>
   <PropertyGroup>
     <_PropertySheetDisplayName>Package</_PropertySheetDisplayName>
@@ -14,8 +17,19 @@
       <Value>$(PackageName)</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
-    <BuildMacro Include="PackageDir">
-      <Value>$(PackageDir)</Value>
+    <BuildMacro Include="PackageTargetDir">
+      <Value>$(PackageTargetDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="PackageSourceDir">
+      <Value>$(PackageSourceDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="PackageSourceFiles">
+      <Value>$(PackageSourceFiles)</Value>
+    </BuildMacro>
+    <BuildMacro Include="PackageTargetFiles">
+      <Value>$(PackageTargetFiles)</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
   </ItemGroup>

@@ -25,48 +25,50 @@
 
 #pragma once
 
-#include "primordialmachine/one_zero_functors/include.hpp"
+#include "primordialmachine/functors/include.hpp"
 #include "primordialmachine/math/trigonometry/angle.hpp"
 #include "primordialmachine/math/trigonometry/angle_unit_degrees.hpp"
 #include "primordialmachine/math/trigonometry/angle_unit_radians.hpp"
 #include "primordialmachine/math/trigonometry/angle_unit_turns.hpp"
 #include "primordialmachine/math/trigonometry/pi.hpp"
-#include <type_traits>
+#include "primordialmachine/one_zero_functors/include.hpp"
 
 namespace primordialmachine {
 
 template<typename UNDERLYING_TYPE>
+struct is_angle<angle<angle_unit_radians, UNDERLYING_TYPE>,
+                enable_if_t<is_scalar_v<UNDERLYING_TYPE>>>
+{
+  static constexpr bool value = true;
+}; // struct is_angle
+
+template<typename UNDERLYING_TYPE>
 struct angle<angle_unit_radians,
              UNDERLYING_TYPE,
-             std::enable_if_t<std::is_floating_point_v<UNDERLYING_TYPE>>>
+             enable_if_t<is_scalar_v<UNDERLYING_TYPE>>>
 {
-  UNDERLYING_TYPE m_value;
+  using unit_type = angle_unit_radians;
+  using underlying_type = UNDERLYING_TYPE;
+  underlying_type m_value;
   angle();
-  angle(UNDERLYING_TYPE value);
+  angle(underlying_type value);
   UNDERLYING_TYPE value() const;
   void value(UNDERLYING_TYPE value);
-  angle<angle_unit_radians, UNDERLYING_TYPE>& operator+=(
-    const angle<angle_unit_radians, UNDERLYING_TYPE>& other);
-  angle<angle_unit_radians, UNDERLYING_TYPE>& operator-=(
-    const angle<angle_unit_radians, UNDERLYING_TYPE>& other);
-  angle<angle_unit_radians, UNDERLYING_TYPE>& operator*=(UNDERLYING_TYPE s);
-  angle<angle_unit_radians, UNDERLYING_TYPE>& operator/=(UNDERLYING_TYPE s);
 
   /***********************************************************************************************/
 
   template<typename T = UNDERLYING_TYPE>
-  auto to_degrees() const -> std::enable_if_t<std::is_same_v<float, T>,
-                                              angle<angle_unit_degrees, float>>;
+  auto to_degrees() const
+    -> enable_if_t<is_same_v<float, T>, angle<angle_unit_degrees, float>>;
 
   template<typename T = UNDERLYING_TYPE>
   auto to_degrees() const
-    -> std::enable_if_t<std::is_same_v<double, T>,
-                        angle<angle_unit_degrees, double>>;
+    -> enable_if_t<is_same_v<double, T>, angle<angle_unit_degrees, double>>;
 
   template<typename T = UNDERYLING_TYPE>
   auto to_degrees() const
-    -> std::enable_if_t<std::is_same_v<long double, T>,
-                        angle<angle_unit_degrees, long double>>;
+    -> enable_if_t<is_same_v<long double, T>,
+                   angle<angle_unit_degrees, long double>>;
 
   /***********************************************************************************************/
 
@@ -75,21 +77,20 @@ struct angle<angle_unit_radians,
   /***********************************************************************************************/
 
   template<typename T = UNDERLYING_TYPE>
-  auto to_turns() const -> std::enable_if_t<std::is_same_v<float, T>,
-                                            angle<angle_unit_turns, float>>;
-
-  template<typename T = UNDERLYING_TYPE>
-  auto to_turns() const -> std::enable_if_t<std::is_same_v<double, T>,
-                                            angle<angle_unit_turns, double>>;
+  auto to_turns() const
+    -> enable_if_t<is_same_v<float, T>, angle<angle_unit_turns, float>>;
 
   template<typename T = UNDERLYING_TYPE>
   auto to_turns() const
-    -> std::enable_if_t<std::is_same_v<long double, T>,
-                        angle<angle_unit_turns, long double>>;
+    -> enable_if_t<is_same_v<double, T>, angle<angle_unit_turns, double>>;
+
+  template<typename T = UNDERLYING_TYPE>
+  auto to_turns() const -> enable_if_t<is_same_v<long double, T>,
+                                       angle<angle_unit_turns, long double>>;
 };
 
 #pragma push_macro("CONDITION")
-#define CONDITION std::enable_if_t<std::is_floating_point_v<UNDERLYING_TYPE>>
+#define CONDITION enable_if_t<is_scalar_v<UNDERLYING_TYPE>>
 
 template<typename UNDERLYING_TYPE>
 angle<angle_unit_radians, UNDERLYING_TYPE, CONDITION>::angle()
@@ -110,39 +111,11 @@ angle<angle_unit_radians, UNDERLYING_TYPE, CONDITION>::value() const
 }
 
 template<typename UNDERLYING_TYPE>
-angle<angle_unit_radians, UNDERLYING_TYPE>&
-angle<angle_unit_radians, UNDERLYING_TYPE, CONDITION>::operator+=(
-  const angle<angle_unit_radians, UNDERLYING_TYPE>& other)
+void
+angle<angle_unit_radians, UNDERLYING_TYPE, CONDITION>::value(
+  UNDERLYING_TYPE value)
 {
-  m_value += other.m_value;
-  return *this;
-}
-
-template<typename UNDERLYING_TYPE>
-angle<angle_unit_radians, UNDERLYING_TYPE>&
-angle<angle_unit_radians, UNDERLYING_TYPE, CONDITION>::operator-=(
-  const angle<angle_unit_radians, UNDERLYING_TYPE>& other)
-{
-  m_value -= other.m_value;
-  return *this;
-}
-
-template<typename UNDERLYING_TYPE>
-angle<angle_unit_radians, UNDERLYING_TYPE>&
-angle<angle_unit_radians, UNDERLYING_TYPE, CONDITION>::operator*=(
-  UNDERLYING_TYPE s)
-{
-  m_value *= s;
-  return *this;
-}
-
-template<typename UNDERLYING_TYPE>
-angle<angle_unit_radians, UNDERLYING_TYPE>&
-angle<angle_unit_radians, UNDERLYING_TYPE, CONDITION>::operator/=(
-  UNDERLYING_TYPE s)
-{
-  m_value /= s;
-  return *this;
+  m_value = value;
 }
 
 /***********************************************************************************************/
@@ -151,8 +124,7 @@ template<typename UNDERLYING_TYPE>
 template<typename T>
 auto
 angle<angle_unit_radians, UNDERLYING_TYPE, CONDITION>::to_degrees() const
-  -> std::enable_if_t<std::is_same_v<float, T>,
-                      angle<angle_unit_degrees, float>>
+  -> enable_if_t<is_same_v<float, T>, angle<angle_unit_degrees, float>>
 {
   return angle<angle_unit_degrees, float>(m_value * 180.0F / pi<float>());
 }
@@ -161,8 +133,7 @@ template<typename UNDERLYING_TYPE>
 template<typename T>
 auto
 angle<angle_unit_radians, UNDERLYING_TYPE, CONDITION>::to_degrees() const
-  -> std::enable_if_t<std::is_same_v<double, T>,
-                      angle<angle_unit_degrees, double>>
+  -> enable_if_t<is_same_v<double, T>, angle<angle_unit_degrees, double>>
 {
   return angle<angle_unit_degrees, double>(m_value * 180.0 / pi<double>());
 }
@@ -171,8 +142,8 @@ template<typename UNDERLYING_TYPE>
 template<typename T>
 auto
 angle<angle_unit_radians, UNDERLYING_TYPE, CONDITION>::to_degrees() const
-  -> std::enable_if_t<std::is_same_v<long double, T>,
-                      angle<angle_unit_degrees, long double>>
+  -> enable_if_t<is_same_v<long double, T>,
+                 angle<angle_unit_degrees, long double>>
 {
   return angle<angle_unit_degrees, long double>(m_value * 180.0L /
                                                 pi<long double>());
@@ -193,7 +164,7 @@ template<typename UNDERLYING_TYPE>
 template<typename T>
 auto
 angle<angle_unit_radians, UNDERLYING_TYPE, CONDITION>::to_turns() const
-  -> std::enable_if_t<std::is_same_v<float, T>, angle<angle_unit_turns, float>>
+  -> enable_if_t<is_same_v<float, T>, angle<angle_unit_turns, float>>
 {
   return angle<angle_unit_turns, float>(m_value / (2.0F * pi<float>()));
 }
@@ -202,8 +173,7 @@ template<typename UNDERLYING_TYPE>
 template<typename T>
 auto
 angle<angle_unit_radians, UNDERLYING_TYPE, CONDITION>::to_turns() const
-  -> std::enable_if_t<std::is_same_v<double, T>,
-                      angle<angle_unit_turns, double>>
+  -> enable_if_t<is_same_v<double, T>, angle<angle_unit_turns, double>>
 {
   return angle<angle_unit_degrees, double>(m_value / (2.0 / pi<double>()));
 }
@@ -212,8 +182,8 @@ template<typename UNDERLYING_TYPE>
 template<typename T>
 auto
 angle<angle_unit_radians, UNDERLYING_TYPE, CONDITION>::to_turns() const
-  -> std::enable_if_t<std::is_same_v<long double, T>,
-                      angle<angle_unit_turns, long double>>
+  -> enable_if_t<is_same_v<long double, T>,
+                 angle<angle_unit_turns, long double>>
 {
   return angle<angle_unit_turns, long double>(m_value /
                                               (2.0L * pi<long double>()));

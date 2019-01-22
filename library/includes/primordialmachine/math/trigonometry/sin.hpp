@@ -25,25 +25,19 @@
 
 #pragma once
 
+#include "primordialmachine/functors/include.hpp"
+#include "primordialmachine/trigonometric_functors/include.hpp"
 #include <cmath>
-#include <type_traits>
 
 namespace primordialmachine {
 
-template<typename T, typename E = void>
-struct sin_functor;
-
 template<typename T>
-auto
-sin(const T& v) -> decltype(sin_functor<T, void>()(v))
+struct sin_functor<T, enable_if_t<is_floating_point_v<T>>>
 {
-  return sin_functor<T, void>()(v);
-}
-
-template<typename T>
-struct sin_functor<T, std::enable_if_t<std::is_floating_point_v<T>>>
-{
-  T operator()(T v) const { return std::sin(v); }
+  T operator()(T v) const noexcept(noexcept(std::sin(v))) 
+  {
+    return std::sin(v);
+  }
 }; // struct sin_functor
 
 } // namespace primordialmachine

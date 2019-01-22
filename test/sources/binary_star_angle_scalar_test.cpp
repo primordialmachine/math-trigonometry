@@ -26,11 +26,16 @@
 #include "primordialmachine/math/trigonometry/include.hpp"
 #include "gtest/gtest.h"
 
-TEST(trigonometry_test, vector_3_default_constructor_test)
-{}
+namespace primordialmachine {
 
-TEST(trigonometry_test, vector_3_constructor_test)
-{}
+TEST(trigonometry_tests, binary_star_angle_scalar_tests)
+{
+  using degrees = angle<angle_unit_degrees, float>;
+  ASSERT_TRUE(degrees(9.f) == degrees(3.f) * 3.f);
+  using radians = angle<angle_unit_radians, float>;
+  ASSERT_TRUE(radians(9.f) == radians(3.f) * 3.f);
+  using turns = angle<angle_unit_turns, float>;
+  ASSERT_TRUE(turns(9.f) == turns(3.f) * 3.f);
+}
 
-TEST(trigonometry_test, binary_plus_vector_3_vector_3_test)
-{}
+} // namespace primordialmachine

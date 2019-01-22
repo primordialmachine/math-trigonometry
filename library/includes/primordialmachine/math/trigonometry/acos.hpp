@@ -25,36 +25,19 @@
 
 #pragma once
 
+#include "primordialmachine/functors/include.hpp"
+#include "primordialmachine/trigonometric_functors/include.hpp"
 #include <cmath>
 
 namespace primordialmachine {
 
-template<typename T, typename E = void>
-struct acos_functor;
-
 template<typename T>
-auto
-acos(const T& v) -> decltype(acos_functor<T, void>()(v))
+struct acos_functor<T, enable_if_t<is_floating_point_v<T>>>
 {
-  return acos_functor<T, void>()(v);
-}
-
-template<>
-struct acos_functor<float, void>
-{
-  float operator()(float v) const { return std::acos(v); }
-}; // struct acos_functor
-
-template<>
-struct acos_functor<double, void>
-{
-  double operator()(double v) const { return std::acos(v); }
-}; // struct acos_functor
-
-template<>
-struct acos_functor<long double, void>
-{
-  long double operator()(long double v) const { return std::acos(v); }
+  T operator()(T v) const noexcept(noexcept(std::acos(v)))
+  {
+    return std::acos(v);
+  }
 }; // struct acos_functor
 
 } // namespace primordialmachine

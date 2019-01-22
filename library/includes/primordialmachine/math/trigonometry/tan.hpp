@@ -25,25 +25,16 @@
 
 #pragma once
 
+#include "primordialmachine/functors/include.hpp"
+#include "primordialmachine/trigonometric_functors/include.hpp"
 #include <cmath>
-#include <type_traits>
 
 namespace primordialmachine {
 
-template<typename T, typename E = void>
-struct tan_functor;
-
 template<typename T>
-auto
-tan(const T& v) -> decltype(tan_functor<T, void>()(v))
+struct tan_functor<T, enable_if_t<is_floating_point_v<T>>>
 {
-  return tan_functor<T, void>()(v);
-}
-
-template<typename T>
-struct tan_functor<T, std::enable_if_t<std::is_floating_point_v<T>>>
-{
-  T operator()(T v) const { return std::tan(v); }
+  T operator()(T v) const noexcept(std::tan(v)) { return std::tan(v); }
 }; // struct tan_functor
 
 } // namespace primordialmachine

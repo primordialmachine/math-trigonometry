@@ -25,10 +25,64 @@
 
 #pragma once
 
+#include "primordialmachine/math/scalars/include.hpp"
 #include "primordialmachine/math/trigonometry/cos.hpp"
 #include "primordialmachine/math/trigonometry/cot.hpp"
 #include "primordialmachine/math/trigonometry/sin.hpp"
 #include "primordialmachine/math/trigonometry/tan.hpp"
+
+namespace primordialmachine {
+
+// TODO: Move into functors library.
+template<class... B>
+inline constexpr bool conjunction_v = std::conjunction<B...>::value;
+
+} // namespace primordialmachine
+
+namespace primordialmachine {
+
+template<typename T, typename E = void>
+struct is_angle
+{
+  static constexpr bool value = false;
+}; // struct is_angle
+
+template<typename T>
+constexpr bool is_angle_v = is_angle<T>::value;
+
+} // namespace primordialmachine
+
+namespace primordialmachine {
+
+template<typename T, typename E = void>
+struct underlying_type;
+
+template<typename T>
+struct underlying_type<T, enable_if_t<is_angle_v<T>>>
+{
+  using type = typename T::underlying_type;
+}; // struct underlying_type
+
+template<typename T>
+using underlying_type_t = typename underlying_type<T>::type;
+
+} // namespace primordialmachine
+
+namespace primordialmachine {
+
+template<typename T, typename E = void>
+struct unit_type;
+
+template<typename T>
+struct unit_type<T, enable_if_t<is_angle_v<T>>>
+{
+  using type = typename T::unit_type;
+}; // struct unit_type
+
+template<typename T>
+using unit_type_t = typename unit_type<T>::type;
+
+} // namespace primordialmachine
 
 namespace primordialmachine {
 
@@ -39,79 +93,60 @@ namespace primordialmachine {
 template<typename UNIT, typename TYPE, typename ENABLED = void>
 struct angle;
 
-template<typename UNIT, typename UNDERLYING_TYPE>
-angle<UNIT, UNDERLYING_TYPE>
-operator+(angle<UNIT, UNDERLYING_TYPE> a, angle<UNIT, UNDERLYING_TYPE> b)
-{
-  a += b;
-  return a;
-}
+} // namespace primordialmachine
 
-template<typename UNIT, typename UNDERLYING_TYPE>
-angle<UNIT, UNDERLYING_TYPE>
-operator-(angle<UNIT, UNDERLYING_TYPE> a, angle<UNIT, UNDERLYING_TYPE> b)
-{
-  a -= b;
-  return a;
-}
-
-template<typename UNIT, typename UNDERLYING_TYPE>
-angle<UNIT, UNDERLYING_TYPE> operator*(angle<UNIT, UNDERLYING_TYPE> a, UNIT s)
-{
-  a *= s;
-  return a;
-}
-
-template<typename UNIT, typename UNDERLYING_TYPE>
-angle<UNIT, UNDERLYING_TYPE>
-operator/(angle<UNIT, UNDERLYING_TYPE> a, UNDERLYING_TYPE s)
-{
-  a /= s;
-  return a;
-}
-
-template<typename UNIT, typename UNDERLYING_TYPE>
-angle<UNIT, UNDERLYING_TYPE> operator*(UNDERLYING_TYPE s,
-                                       angle<UNIT, UNDERLYING_TYPE> a)
-{
-  a *= s;
-  return a;
-}
+namespace primordialmachine {
 
 template<typename UNIT, typename UNDERLYING_TYPE>
 struct cos_functor<angle<UNIT, UNDERLYING_TYPE>, void>
 {
   auto operator()(const angle<UNIT, UNDERLYING_TYPE>& a) const
+    noexcept(noexcept(cos(a.to_radians().value())))
   {
     return cos(a.to_radians().value());
   }
-};
+}; // struct cos_functor
+
+} // namespace primordialmachine
+
+namespace primordialmachine {
 
 template<typename UNIT, typename UNDERLYING_TYPE>
 struct cot_functor<angle<UNIT, UNDERLYING_TYPE>, void>
 {
   auto operator()(const angle<UNIT, UNDERLYING_TYPE>& a) const
+    noexcept(noexcept(cot(a.to_radians().value())))
   {
     return cot(a.to_radians().value());
   }
-};
+}; // struct cot_functor
+
+} // namespace primordialmachine
+
+namespace primordialmachine {
 
 template<typename UNIT, typename UNDERLYING_TYPE>
 struct sin_functor<angle<UNIT, UNDERLYING_TYPE>, void>
 {
   auto operator()(const angle<UNIT, UNDERLYING_TYPE>& a) const
+    noexcept(noexcept(sin(a.to_radians().value())))
   {
     return sin(a.to_radians().value());
   }
-};
+}; // struct sin_functor
+
+} // namespace primordialmachine
+
+namespace primordialmachine {
 
 template<typename UNIT, typename UNDERLYING_TYPE>
 struct tan_functor<angle<UNIT, UNDERLYING_TYPE>, void>
 {
   auto operator()(const angle<UNIT, UNDERLYING_TYPE>& a) const
+    noexcept(noexcept(tan(a.to_radians().value())))
   {
     return tan(a.to_radians().value());
   }
-};
+}; // struct tan_functor
 
 } // namespace primordialmachine
