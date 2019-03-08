@@ -37,29 +37,41 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Label="Shared" />
-  <ImportGroup Label="PropertySheets" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="package.props" />
+    <Import Project="..\commons.props" />
+    <Import Project="..\commons-debug.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="package.props" />
+    <Import Project="..\commons.props" />
+    <Import Project="..\commons-debug.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="package.props" />
+    <Import Project="..\commons.props" />
+    <Import Project="..\commons-release.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="package.props" />
+    <Import Project="..\commons.props" />
+    <Import Project="..\commons-release.props" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)products\$(ProjectName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</OutDir>
-    <IntDir>$(SolutionDir)intermediates\$(ProjectName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</IntDir>
-    <TargetName>math-trigonometry-test</TargetName>
+    <TargetName>$(PackageName)-test</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)products\$(ProjectName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</OutDir>
-    <IntDir>$(SolutionDir)intermediates\$(ProjectName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</IntDir>
-    <TargetName>math-trigonometry-test</TargetName>
+    <TargetName>$(PackageName)-test</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)products\$(ProjectName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</OutDir>
-    <IntDir>$(SolutionDir)intermediates\$(ProjectName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</IntDir>
-    <TargetName>math-trigonometry-test</TargetName>
+    <TargetName>$(PackageName)-test</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)products\$(ProjectName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</OutDir>
-    <IntDir>$(SolutionDir)intermediates\$(ProjectName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</IntDir>
-    <TargetName>math-trigonometry-test</TargetName>
+    <TargetName>$(PackageName)-test</TargetName>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="package.props" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -83,30 +95,15 @@
   </ImportGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>GTEST_LANG_CXX11=1;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>$(SolutionDir)external\primordialmachine\errors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\arithmetic-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\relational-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\trigonometric-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes\;$(SolutionDir)external\primordialmachine\functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\math-scalars\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)packages\primordialmachine\math-trigonometry\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <StringPooling>true</StringPooling>
+      <AdditionalIncludeDirectories>$(SolutionDir)external\primordialmachine\errors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\arithmetic-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\relational-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\trigonometric-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes\;$(SolutionDir)external\primordialmachine\functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\math-scalars\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(PackageTargetDir)includes\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ControlFlowGuard>Guard</ControlFlowGuard>
-      <FunctionLevelLinking>false</FunctionLevelLinking>
       <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
-      <ConformanceMode>true</ConformanceMode>
-      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <OpenMPSupport>false</OpenMPSupport>
-      <EnableModules>false</EnableModules>
       <SupportJustMyCode>true</SupportJustMyCode>
-      <CompileAsManaged>false</CompileAsManaged>
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <SDLCheck>true</SDLCheck>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -115,30 +112,15 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>GTEST_LANG_CXX11=1;X64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>$(SolutionDir)external\primordialmachine\errors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\arithmetic-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\relational-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\trigonometric-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes\;$(SolutionDir)external\primordialmachine\functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\math-scalars\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)packages\primordialmachine\math-trigonometry\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <StringPooling>true</StringPooling>
+      <AdditionalIncludeDirectories>$(SolutionDir)external\primordialmachine\errors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\arithmetic-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\relational-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\trigonometric-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes\;$(SolutionDir)external\primordialmachine\functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\math-scalars\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(PackageTargetDir)includes\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ControlFlowGuard>Guard</ControlFlowGuard>
-      <FunctionLevelLinking>false</FunctionLevelLinking>
       <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
-      <ConformanceMode>true</ConformanceMode>
-      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <OpenMPSupport>false</OpenMPSupport>
-      <EnableModules>false</EnableModules>
       <SupportJustMyCode>true</SupportJustMyCode>
-      <CompileAsManaged>false</CompileAsManaged>
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <SDLCheck>true</SDLCheck>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <OmitFramePointers>false</OmitFramePointers>
     </ClCompile>
     <Link>
@@ -148,34 +130,14 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PreprocessorDefinitions>GTEST_LANG_CXX11=1;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>$(SolutionDir)external\primordialmachine\errors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\arithmetic-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\relational-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\trigonometric-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes\;$(SolutionDir)external\primordialmachine\functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\math-scalars\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)packages\primordialmachine\math-trigonometry\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <OmitFramePointers>true</OmitFramePointers>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <AdditionalIncludeDirectories>$(SolutionDir)external\primordialmachine\errors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\arithmetic-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\relational-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\trigonometric-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes\;$(SolutionDir)external\primordialmachine\functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\math-scalars\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(PackageTargetDir)includes\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <StringPooling>true</StringPooling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <ControlFlowGuard>false</ControlFlowGuard>
-      <FunctionLevelLinking>false</FunctionLevelLinking>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
-      <ConformanceMode>true</ConformanceMode>
-      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <OpenMPSupport>false</OpenMPSupport>
-      <EnableModules>false</EnableModules>
-      <CompileAsManaged>false</CompileAsManaged>
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <SDLCheck>false</SDLCheck>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -187,34 +149,14 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PreprocessorDefinitions>GTEST_LANG_CXX11=1;X64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>$(SolutionDir)external\primordialmachine\errors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\arithmetic-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\relational-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\trigonometric-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes\;$(SolutionDir)external\primordialmachine\functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\math-scalars\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)packages\primordialmachine\math-trigonometry\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <OmitFramePointers>true</OmitFramePointers>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <AdditionalIncludeDirectories>$(SolutionDir)external\primordialmachine\errors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\arithmetic-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\relational-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\trigonometric-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes\;$(SolutionDir)external\primordialmachine\functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\math-scalars\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(PackageTargetDir)includes\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <StringPooling>true</StringPooling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <ControlFlowGuard>false</ControlFlowGuard>
-      <FunctionLevelLinking>false</FunctionLevelLinking>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
-      <ConformanceMode>true</ConformanceMode>
-      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <OpenMPSupport>false</OpenMPSupport>
-      <EnableModules>false</EnableModules>
-      <CompileAsManaged>false</CompileAsManaged>
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <SDLCheck>false</SDLCheck>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

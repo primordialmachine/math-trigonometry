@@ -98,69 +98,54 @@
   <ImportGroup Label="Shared">
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="package.props" />
+    <Import Project="..\commons.props" />
+    <Import Project="..\commons-debug.props" />
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="package.props" />
+    <Import Project="..\commons.props" />
+    <Import Project="..\commons-release.props" />
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="package.props" />
+    <Import Project="..\commons.props" />
+    <Import Project="..\commons-debug.props" />
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="package.props" />
+    <Import Project="..\commons.props" />
+    <Import Project="..\commons-release.props" />
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)products\$(PackageName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</OutDir>
-    <IntDir>$(SolutionDir)intermediates\$(PackageName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</IntDir>
     <TargetName>$(PackageName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)products\$(PackageName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</OutDir>
-    <IntDir>$(SolutionDir)intermediates\$(PackageName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</IntDir>
     <TargetName>$(PackageName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)products\$(PackageName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</OutDir>
-    <IntDir>$(SolutionDir)intermediates\$(PackageName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</IntDir>
     <TargetName>$(PackageName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(SolutionDir)intermediates\$(PackageName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</IntDir>
-    <OutDir>$(SolutionDir)products\$(PackageName)\$(PlatformTarget.toLower())\$(Configuration.toLower())\</OutDir>
     <TargetName>$(PackageName)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <OpenMPSupport>false</OpenMPSupport>
-      <EnableModules>false</EnableModules>
       <AdditionalIncludeDirectories>$(ProjectDir)includes;$(SolutionDir)external\primordialmachine\arithmetic-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\trigonometric-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\errors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\relational-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\math-scalars\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes</AdditionalIncludeDirectories>
-      <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ControlFlowGuard>Guard</ControlFlowGuard>
-      <FunctionLevelLinking>false</FunctionLevelLinking>
       <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <CompileAsManaged>false</CompileAsManaged>
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -176,27 +161,12 @@ xcopy $(OutDir)*.lib $(PackageTargetDir)libraries\ /S /E /Y</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <OpenMPSupport>false</OpenMPSupport>
-      <EnableModules>false</EnableModules>
       <AdditionalIncludeDirectories>$(ProjectDir)includes;$(SolutionDir)external\primordialmachine\arithmetic-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\trigonometric-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\errors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\relational-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\math-scalars\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes</AdditionalIncludeDirectories>
-      <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ControlFlowGuard>Guard</ControlFlowGuard>
-      <FunctionLevelLinking>false</FunctionLevelLinking>
       <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <CompileAsManaged>false</CompileAsManaged>
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <OmitFramePointers>false</OmitFramePointers>
     </ClCompile>
     <Link>
@@ -213,32 +183,13 @@ xcopy $(OutDir)*.lib $(PackageTargetDir)libraries\ /S /E /Y</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>false</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <OpenMPSupport>false</OpenMPSupport>
-      <EnableModules>false</EnableModules>
       <AdditionalIncludeDirectories>$(ProjectDir)includes;$(SolutionDir)external\primordialmachine\arithmetic-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\trigonometric-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\errors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\relational-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\math-scalars\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes</AdditionalIncludeDirectories>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <OmitFramePointers>true</OmitFramePointers>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <ControlFlowGuard>false</ControlFlowGuard>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
-      <CompileAsManaged>false</CompileAsManaged>
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -256,32 +207,13 @@ xcopy $(OutDir)*.lib $(PackageTargetDir)libraries\ /S /E /Y</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>false</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <OpenMPSupport>false</OpenMPSupport>
-      <EnableModules>false</EnableModules>
       <AdditionalIncludeDirectories>$(ProjectDir)includes;$(SolutionDir)external\primordialmachine\arithmetic-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\trigonometric-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\errors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\relational-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\one-zero-functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\functors\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes;$(SolutionDir)external\primordialmachine\math-scalars\$(PlatformTarget.toLower())\$(Configuration.toLower())\includes</AdditionalIncludeDirectories>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <OmitFramePointers>true</OmitFramePointers>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <ControlFlowGuard>false</ControlFlowGuard>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
-      <CompileAsManaged>false</CompileAsManaged>
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
